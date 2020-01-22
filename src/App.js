@@ -50,6 +50,9 @@ const App = () => {
 					<p>CHRISTMAS</p>
 				)} */}
 			</header>
+			<footer className="app-footer">
+				<span>0.1.0</span>
+			</footer>
 		</div>
 	);
 }

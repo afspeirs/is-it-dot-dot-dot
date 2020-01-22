@@ -12,3 +12,11 @@
 	font-size: calc(10px + 2vmin);
 	color: white;
 }
+
+.app-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	color: white;
+	padding: 8px;
+}
