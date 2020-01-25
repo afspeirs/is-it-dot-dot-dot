@@ -9,7 +9,7 @@ const App = () => {
 		return {
 			day: d.getDate(),
 			month: d.getMonth() + 1,
-		}
+		};
 	};
 
 	const [date, setDate] = useState(getDate);
@@ -22,7 +22,7 @@ const App = () => {
 			if (JSON.stringify(date) !== JSON.stringify(currentDate)) {
 				setDate(getDate);
 			}
-		}, 1000)
+		}, 1000);
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
@@ -30,16 +30,15 @@ const App = () => {
 	useEffect(() => {
 		console.log(date);
 
-		datesToDisplay.forEach(event => {
+		datesToDisplay.forEach((event) => {
 			console.log(event);
 			const matchDay = event.day === date.day;
 			const matchMonth = event.month === date.month;
 
 			if (matchDay && matchMonth) {
-				setText(event.name)
+				setText(event.name);
 			}
-
-		})
+		});
 	}, [date]); // eslint-disable-line
 
 	return (
@@ -51,10 +50,10 @@ const App = () => {
 				)} */}
 			</header>
 			<footer className="app-footer">
-				<span>0.1.0</span>
+				<span>{`v${process.env.REACT_APP_VERSION}`}</span>
 			</footer>
 		</div>
 	);
-}
+};
 
 export default App;
