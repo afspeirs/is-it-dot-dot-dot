@@ -1,15 +1,15 @@
-.app {
-	text-align: center;
+html,
+body {
+	background-color: #464;
 }
 
 .app-header {
-	background-color: #464;
-	min-height: 100vh;
+	min-height: 50vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-size: calc(10px + 2vmin);
+	font-size: calc(10px + 5vmin);
 	color: white;
 }
 

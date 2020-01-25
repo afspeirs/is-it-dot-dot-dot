@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import datesToDisplay from './dates';
+import { ThemeProvider } from '@material-ui/styles';
+
+import Navigation from './Navigation';
+import datesToDisplay from '../dates';
+import theme from '../theme';
+import { getDate } from '../utils';
 import './App.css';
 
 const App = () => {
-	const getDate = () => {
-		const d = new Date();
-
-		return {
-			day: d.getDate(),
-			month: d.getMonth() + 1,
-		};
-	};
-
 	const [date, setDate] = useState(getDate);
 	const [text, setText] = useState('NO');
 
@@ -42,7 +38,8 @@ const App = () => {
 	}, [date]); // eslint-disable-line
 
 	return (
-		<div className="app">
+		<ThemeProvider theme={theme}>
+			<Navigation />
 			<header className="app-header">
 				{text}
 				{/* {date.day === 25 && date.month === 12 && (
@@ -52,7 +49,7 @@ const App = () => {
 			<footer className="app-footer">
 				<span>{`v${process.env.REACT_APP_VERSION}`}</span>
 			</footer>
-		</div>
+		</ThemeProvider>
 	);
 };
 
