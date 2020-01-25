@@ -1,17 +1,18 @@
 export default [
 	{
-		name: 'Christmas',
 		day: 25,
 		month: 12,
+		name: 'Christmas',
 	},
 	{
-		name: 'App Day',
-		day: 22,
+		day: 25,
 		month: 1,
+		name: 'App Day',
 	},
 	{
-		name: 'NO',
 		day: 1,
 		month: 4,
+		name: 'April Fools',
+		value: 'NO',
 	},
 ];
