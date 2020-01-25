@@ -2,22 +2,33 @@ import React from 'react';
 import {
 	List,
 	ListItem,
-	ListItemIcon,
+	ListItemSecondaryAction,
 	ListItemText,
 } from '@material-ui/core';
-import {
-	Add as AddIcon,
-} from '@material-ui/icons';
 
-const DrawerContent = () => (
-	<List disablePadding>
-		<ListItem>
-			<ListItemIcon>
-				<AddIcon />
-			</ListItemIcon>
-			<ListItemText primary="Create Note" />
-		</ListItem>
-	</List>
-);
+import useStyles from './DrawerContent.styled';
+
+const DrawerContent = () => {
+	const classes = useStyles();
+
+	return (
+		<>
+			<List className={classes.list} disablePadding>
+				<ListItem>
+					<ListItemText primary="Example ListItem" />
+				</ListItem>
+			</List>
+
+			<List disablePadding>
+				<ListItem>
+					<ListItemText primary="App version:" />
+					<ListItemSecondaryAction>
+						{`v${process.env.REACT_APP_VERSION}`}
+					</ListItemSecondaryAction>
+				</ListItem>
+			</List>
+		</>
+	);
+};
 
 export default DrawerContent;

@@ -46,9 +46,6 @@ const App = () => {
 					<p>CHRISTMAS</p>
 				)} */}
 			</header>
-			<footer className="app-footer">
-				<span>{`v${process.env.REACT_APP_VERSION}`}</span>
-			</footer>
 		</ThemeProvider>
 	);
 };
