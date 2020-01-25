@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 
-import Navigation from './Navigation';
-import datesToDisplay from '../dates';
-import theme from '../theme';
-import { getDate } from '../utils';
 import './App.css';
+import Navigation from '../Navigation';
+import datesToDisplay from '../../dates';
+import theme from '../../theme';
+import { getDate } from '../../utils';
 
 const App = () => {
 	const [date, setDate] = useState(getDate);
