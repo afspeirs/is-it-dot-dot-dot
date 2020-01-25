@@ -1,20 +1,29 @@
 {
 	"short_name": "Is it ...",
 	"name": "Is it ...",
-	"icons": [
-		{
-		"src": "logo192.png",
-		"type": "image/png",
-		"sizes": "192x192"
-		},
-		{
-		"src": "logo512.png",
-		"type": "image/png",
-		"sizes": "512x512"
-		}
-	],
+	"description": "Web site that tells you if is a certain day",
+	"dir": "ltr",
+	"lang": "en",
 	"start_url": ".",
 	"display": "standalone",
-	"theme_color": "#464464",
-	"background_color": "#464464"
+	"theme_color": "#446644",
+	"background_color": "#446644",
+	"icons": [
+		{
+			"src": "/icon-maskable-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "/icon-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/icon-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
 }
