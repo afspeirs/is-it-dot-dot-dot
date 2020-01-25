@@ -1,30 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
 	AppBar,
 	IconButton,
+	SwipeableDrawer,
 	Toolbar,
 	Typography,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-	},
-	title: {
-		flexGrow: 1,
-	},
-}));
+import useStyles from './Navigation.styled';
+import DrawerContent from '../DrawerContent';
 
 const Navigation = () => {
 	const classes = useStyles();
+	const [open, setOpen] = useState(false);
 
 	return (
-		<div className={classes.root}>
+		<>
 			<AppBar position="static" elevation={0}>
 				<Toolbar>
 					<IconButton
@@ -32,6 +25,7 @@ const Navigation = () => {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="menu"
+						onClick={() => setOpen(true)}
 					>
 						<MenuIcon />
 					</IconButton>
@@ -40,7 +34,22 @@ const Navigation = () => {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-		</div>
+
+			<SwipeableDrawer
+				variant="temporary"
+				anchor="left"
+				open={open}
+				className={classes.drawer}
+				classes={{
+					paper: classes.drawerPaper,
+				}}
+				onOpen={() => setOpen(true)}
+				onClose={() => setOpen(false)}
+				ModalProps={{ keepMounted: true }}
+			>
+				<DrawerContent />
+			</SwipeableDrawer>
+		</>
 	);
 };
 
