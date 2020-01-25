@@ -4,11 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+import { useDates } from '../../hooks/DatesContext';
+
 const TabPanel = ({
 	children,
 	index,
 	value,
-	...other
 }) => (
 	<Typography
 		component="div"
@@ -16,7 +17,6 @@ const TabPanel = ({
 		hidden={value !== index}
 		id={`vertical-tabpanel-${index}`}
 		aria-labelledby={`vertical-tab-${index}`}
-		{...other}
 	>
 		{value === index && <Box p={3}>{children}</Box>}
 	</Typography>
@@ -41,30 +41,20 @@ const useStyles = makeStyles((theme) => ({
 
 const TabContainer = ({ tab }) => {
 	const classes = useStyles();
+	const { dates, isToday } = useDates();
+	// console.log(dates);
 
 	return (
 		<div className={classes.root}>
-			<TabPanel value={tab} index={0}>
-				Item One
-			</TabPanel>
-			<TabPanel value={tab} index={1}>
-				Item Two
-			</TabPanel>
-			<TabPanel value={tab} index={2}>
-				Item Three
-			</TabPanel>
-			<TabPanel value={tab} index={3}>
-				Item Four
-			</TabPanel>
-			<TabPanel value={tab} index={4}>
-				Item Five
-			</TabPanel>
-			<TabPanel value={tab} index={5}>
-				Item Six
-			</TabPanel>
-			<TabPanel value={tab} index={6}>
-				Item Seven
-			</TabPanel>
+			{dates.map((date, index) => (
+				<TabPanel
+					key={date.name}
+					value={tab}
+					index={index}
+				>
+					{isToday(date)}
+				</TabPanel>
+			))}
 		</div>
 	);
 };

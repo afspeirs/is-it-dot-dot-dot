@@ -11,6 +11,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 
 import useStyles from './Navigation.styled';
 import DrawerContent from '../DrawerContent';
+import { useDates } from '../../hooks/DatesContext';
 
 const Navigation = ({
 	tab,
@@ -18,6 +19,7 @@ const Navigation = ({
 }) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
+	const { dates } = useDates();
 
 	const handleTabChange = (event, newTab) => {
 		setOpen(false);
@@ -38,7 +40,7 @@ const Navigation = ({
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" className={classes.title}>
-						Is It ...
+						{`Is it ${dates[tab].name}?`}
 					</Typography>
 				</Toolbar>
 			</AppBar>
