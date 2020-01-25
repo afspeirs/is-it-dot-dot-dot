@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 
-import './App.css';
 import Navigation from '../Navigation';
 import TabContainer from '../TabContainer';
 import datesToDisplay from '../../dates';
