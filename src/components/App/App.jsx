@@ -3,6 +3,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import './App.css';
 import Navigation from '../Navigation';
+import TabContainer from '../TabContainer';
 import datesToDisplay from '../../dates';
 import theme from '../../theme';
 import { getDate } from '../../utils';
@@ -10,6 +11,7 @@ import { getDate } from '../../utils';
 const App = () => {
 	const [date, setDate] = useState(getDate);
 	const [text, setText] = useState('NO');
+	const [tab, setTab] = useState(0);
 
 	// Only update the date variable if the date changes
 	useEffect(() => {
@@ -39,13 +41,11 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Navigation />
-			<header className="app-header">
-				{text}
-				{/* {date.day === 25 && date.month === 12 && (
-					<p>CHRISTMAS</p>
-				)} */}
-			</header>
+			<Navigation
+				tab={tab}
+				setTab={setTab}
+			/>
+			<TabContainer tab={tab} />
 		</ThemeProvider>
 	);
 };
