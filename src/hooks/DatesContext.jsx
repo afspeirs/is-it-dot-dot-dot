@@ -20,15 +20,9 @@ function useDatesProvider() {
 	const [textYes] = useState('YES');
 	const [textNo] = useState('NO');
 
-	const isToday = (date) => {
-		const matchDay = currentDate.day === date.day;
-		const matchMonth = currentDate.month === date.month;
-
-		if (matchDay && matchMonth) {
-			return (date.value || textYes);
-		}
-		return (date.value || textNo);
-	};
+	// Return yes values if today
+	// Return no values if not
+	const isToday = (date) => (date.today ? (date.value || textYes) : (date.value || textNo));
 
 	// Only update the date variable if the date changes
 	useEffect(() => {
@@ -41,20 +35,20 @@ function useDatesProvider() {
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
-	// // Update the text if one of the dates is today
-	// useEffect(() => {
-	// 	// console.log(currentDate);
+	// Update the text if one of the dates is today
+	useEffect(() => {
+		dates.forEach((event, index) => {
+			// console.log(event);
+			const matchDay = event.day === currentDate.day;
+			const matchMonth = event.month === currentDate.month;
 
-	// 	dates.forEach((event) => {
-	// 		// console.log(event);
-	// 		const matchDay = event.day === currentDate.day;
-	// 		const matchMonth = event.month === currentDate.month;
-
-	// 		if (matchDay && matchMonth) {
-	// 			setText(event.name);
-	// 		}
-	// 	});
-	// }, [currentDate]); // eslint-disable-line
+			if (matchDay && matchMonth) {
+				dates[index].today = true;
+			} else {
+				dates[index].today = false;
+			}
+		});
+	}, [currentDate]); // eslint-disable-line
 
 	return {
 		currentDate,

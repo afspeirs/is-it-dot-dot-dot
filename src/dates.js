@@ -5,7 +5,7 @@ export default [
 		name: 'Christmas',
 	},
 	{
-		day: 25,
+		day: 27,
 		month: 1,
 		name: 'App Day',
 	},
