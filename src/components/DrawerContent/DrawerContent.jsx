@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
 	List,
 	ListItem,
-	ListItemSecondaryAction,
+	ListItemIcon,
 	ListItemText,
-	Tabs,
 	Tab,
+	Tabs,
 } from '@material-ui/core';
+import {
+	Settings as SettingsIcon,
+} from '@material-ui/icons';
 
 import useStyles from './DrawerContent.styled';
+import Settings from '../../modals/Settings';
 import { useDates } from '../../hooks/DatesContext';
 
 const DrawerContent = ({
@@ -18,6 +22,9 @@ const DrawerContent = ({
 }) => {
 	const classes = useStyles();
 	const { dates } = useDates();
+	const [openSettings, setOpenSettings] = useState(false);
+	const handleOpenSettings = () => setOpenSettings(true);
+	const handleCloseSettings = () => setOpenSettings(false);
 	// console.log(dates);
 
 	return (
@@ -41,13 +48,18 @@ const DrawerContent = ({
 			</Tabs>
 
 			<List disablePadding>
-				<ListItem>
-					<ListItemText primary="App version:" />
-					<ListItemSecondaryAction>
-						{`v${process.env.REACT_APP_VERSION}`}
-					</ListItemSecondaryAction>
+				<ListItem button onClick={handleOpenSettings}>
+					<ListItemIcon>
+						<SettingsIcon />
+					</ListItemIcon>
+					<ListItemText primary="Settings" />
 				</ListItem>
 			</List>
+
+			<Settings
+				open={openSettings}
+				handleClose={handleCloseSettings}
+			/>
 		</>
 	);
 };
