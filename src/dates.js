@@ -13,6 +13,6 @@ export default [
 		day: 1,
 		month: 4,
 		name: 'April Fools',
-		value: 'NO',
+		valueYes: 'NO',
 	},
 ];

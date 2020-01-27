@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import dates from '../dates';
+import localDates from '../dates';
 import { getCurrentDate } from '../utils';
 
 const DatesContext = createContext();
@@ -17,12 +17,27 @@ export const useDates = () => useContext(DatesContext);
 // Provider hook that creates dates object and handles state
 function useDatesProvider() {
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
+	const [dates, setDates] = useState(localDates);
 	const [textYes] = useState('YES');
 	const [textNo] = useState('NO');
 
 	// Return yes values if today
 	// Return no values if not
-	const isToday = (date) => (date.today ? (date.value || textYes) : (date.value || textNo));
+	const isToday = (date) => (date.today ? (date.valueYes || textYes) : (date.valueNo || textNo));
+
+	const updateDate = (value, name) => {
+		const [index, key] = name.split(',');
+		console.log(value, index, key);
+
+		const local = [...dates];
+		console.log(local);
+
+		local[index][key] = value;
+
+		console.log(local);
+
+		setDates(local);
+	};
 
 	// Only update the date variable if the date changes
 	useEffect(() => {
@@ -54,6 +69,7 @@ function useDatesProvider() {
 		currentDate,
 		dates,
 		isToday,
+		updateDate,
 	};
 }
 
