@@ -41,21 +41,6 @@ function useDatesProvider() {
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
-	// Update the text if one of the dates is today
-	useEffect(() => {
-		dates.forEach((event, index) => {
-			// console.log(event);
-			const matchDay = event.day === currentDate.day;
-			const matchMonth = event.month === currentDate.month;
-
-			if (matchDay && matchMonth) {
-				dates[index].today = true;
-			} else {
-				dates[index].today = false;
-			}
-		});
-	}, [currentDate, dates]);
-
 	return {
 		currentDate,
 		dates,
