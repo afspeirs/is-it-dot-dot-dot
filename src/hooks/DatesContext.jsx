@@ -25,20 +25,6 @@ function useDatesProvider() {
 	// Return no values if not
 	const isToday = (date) => (date.today ? (date.valueYes || textYes) : (date.valueNo || textNo));
 
-	const updateDate = (value, name) => {
-		const [index, key] = name.split(',');
-		console.log(value, index, key);
-
-		const local = [...dates];
-		console.log(local);
-
-		local[index][key] = value;
-
-		console.log(local);
-
-		setDates(local);
-	};
-
 	// Only update the date variable if the date changes
 	useEffect(() => {
 		const now = getCurrentDate();
@@ -69,7 +55,7 @@ function useDatesProvider() {
 		currentDate,
 		dates,
 		isToday,
-		updateDate,
+		setDates,
 	};
 }
 
