@@ -23,7 +23,12 @@ function useDatesProvider() {
 
 	// Return yes values if today
 	// Return no values if not
-	const isToday = (date) => (date.today ? (date.valueYes || textYes) : (date.valueNo || textNo));
+	const isToday = (date) => {
+		if (date.day === currentDate.day && date.month === currentDate.month) {
+			return date.valueYes || textYes;
+		}
+		return date.valueNo || textNo;
+	};
 
 	// Only update the date variable if the date changes
 	useEffect(() => {
@@ -49,7 +54,7 @@ function useDatesProvider() {
 				dates[index].today = false;
 			}
 		});
-	}, [currentDate]); // eslint-disable-line
+	}, [currentDate, dates]);
 
 	return {
 		currentDate,
