@@ -19,10 +19,7 @@ import EditDates from '../../modals/EditDates';
 import Settings from '../../modals/Settings';
 import { useDates } from '../../hooks/DatesContext';
 
-const DrawerContent = ({
-	tab,
-	handleTabChange,
-}) => {
+const DrawerContent = ({ tab, handleTabChange }) => {
 	const classes = useStyles();
 	const { dates } = useDates();
 	const [openEditDates, setOpenEditDates] = useState(false);
@@ -55,7 +52,7 @@ const DrawerContent = ({
 
 			<List>
 				<ListItem>
-					<Typography variant="body2">This app shows tells you if it is the date specified</Typography>
+					<Typography variant="body2">This app informs you if it is the date specified</Typography>
 				</ListItem>
 				<ListItem>
 					<Typography variant="body2">Add a date to show it in the list below</Typography>
