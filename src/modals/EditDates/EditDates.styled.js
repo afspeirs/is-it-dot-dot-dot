@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		padding: theme.spacing(3),
 		flexWrap: 'wrap',
-		justifyContent: 'space-around',
+		justifyContent: 'space-between',
 	},
 	fab: {
 		position: 'absolute',
