@@ -7,11 +7,19 @@ const useStyles = makeStyles((theme) => ({
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
 	},
+	fab: {
+		position: 'absolute',
+		bottom: theme.spacing(2),
+		right: theme.spacing(2),
+	},
 	formControl: {
 		minWidth: 86,
 	},
 	text: {
 		maxWidth: '128px',
+	},
+	spacer: {
+		marginBottom: theme.spacing(8),
 	},
 }));
 
