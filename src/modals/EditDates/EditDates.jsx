@@ -4,10 +4,12 @@ import {
 	Fab,
 	Divider,
 	MenuItem,
+	IconButton,
 	TextField,
 } from '@material-ui/core';
 import {
 	Add as AddIcon,
+	Delete as DeleteIcon,
 } from '@material-ui/icons';
 
 import useStyles from './EditDates.styled';
@@ -24,6 +26,11 @@ const EditDates = ({ open, handleClose }) => {
 	const fabDisabled = dates[dates.length - 1].name === '';
 
 	const addDate = () => setDates([...dates, { ...blankDate }]);
+	const deleteDate = (index) => {
+		const updatedDates = [...dates];
+		updatedDates.splice(index, 1);
+		setDates(updatedDates);
+	};
 	const handleChangeSelect = (event) => {
 		const { name, value } = event.target;
 		const [key, idx] = name.split('-');
@@ -124,6 +131,9 @@ const EditDates = ({ open, handleClose }) => {
 											'data-key': 'valueNo',
 										}}
 									/>
+									<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
+										<DeleteIcon />
+									</IconButton>
 								</form>
 							</React.Fragment>
 						);
