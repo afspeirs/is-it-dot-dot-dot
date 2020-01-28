@@ -48,7 +48,6 @@ const Modal = ({
 
 	return (
 		<Dialog
-			className={classes.dialog}
 			fullWidth
 			fullScreen={fullScreenModal}
 			open={open}

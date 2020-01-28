@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import dates from '../dates';
+import localDates from '../dates';
 import { getCurrentDate } from '../utils';
 
 const DatesContext = createContext();
@@ -17,12 +17,18 @@ export const useDates = () => useContext(DatesContext);
 // Provider hook that creates dates object and handles state
 function useDatesProvider() {
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
+	const [dates, setDates] = useState(localDates);
 	const [textYes] = useState('YES');
 	const [textNo] = useState('NO');
 
 	// Return yes values if today
 	// Return no values if not
-	const isToday = (date) => (date.today ? (date.value || textYes) : (date.value || textNo));
+	const isToday = (date) => {
+		if (date.day === currentDate.day && date.month === currentDate.month) {
+			return date.valueYes || textYes;
+		}
+		return date.valueNo || textNo;
+	};
 
 	// Only update the date variable if the date changes
 	useEffect(() => {
@@ -35,25 +41,11 @@ function useDatesProvider() {
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
-	// Update the text if one of the dates is today
-	useEffect(() => {
-		dates.forEach((event, index) => {
-			// console.log(event);
-			const matchDay = event.day === currentDate.day;
-			const matchMonth = event.month === currentDate.month;
-
-			if (matchDay && matchMonth) {
-				dates[index].today = true;
-			} else {
-				dates[index].today = false;
-			}
-		});
-	}, [currentDate]); // eslint-disable-line
-
 	return {
 		currentDate,
 		dates,
 		isToday,
+		setDates,
 	};
 }
 
