@@ -77,11 +77,6 @@ const EditDates = ({
 									label="Day"
 									value={date.day}
 									onChange={handleChangeSelect}
-									data-idx={index}
-									inputProps={{
-										'data-idx': index,
-										'data-key': 'day',
-									}}
 								>
 									{days.map((value) => (
 										<MenuItem key={value} value={value}>{value}</MenuItem>
@@ -107,6 +102,10 @@ const EditDates = ({
 									value={date.valueYes}
 									className={classes.text}
 									onChange={handleChangeText}
+									inputProps={{
+										'data-idx': index,
+										'data-key': 'valueYes',
+									}}
 								/>
 								<TextField
 									id={valueNoId}
@@ -116,6 +115,10 @@ const EditDates = ({
 									value={date.valueNo}
 									className={classes.text}
 									onChange={handleChangeText}
+									inputProps={{
+										'data-idx': index,
+										'data-key': 'valueNo',
+									}}
 								/>
 							</form>
 						</React.Fragment>
