@@ -13,3 +13,25 @@ body {
 *:after {
 	box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+	max-width: 8px;
+	max-height: 8px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: #ccc;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #aaa;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #888;
+}
+::-webkit-scrollbar-button {
+	background: #ccc;
+	height: 0;
+	width: 0;
+}
