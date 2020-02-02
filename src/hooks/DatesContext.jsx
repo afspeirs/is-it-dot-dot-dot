@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import dates from '../dates';
+import localDates from '../dates';
 import { getCurrentDate } from '../utils';
 
 const DatesContext = createContext();
@@ -17,17 +17,31 @@ export const useDates = () => useContext(DatesContext);
 // Provider hook that creates dates object and handles state
 function useDatesProvider() {
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
+	const [dates, setDates] = useState(JSON.parse(localStorage.getItem('dates')) || localDates);
 	const [textYes] = useState('YES');
 	const [textNo] = useState('NO');
+	const blankDate = { day: 1, month: 1, name: '' };
 
+	// Return yes values if today
+	// Return no values if not
 	const isToday = (date) => {
-		const matchDay = currentDate.day === date.day;
-		const matchMonth = currentDate.month === date.month;
-
-		if (matchDay && matchMonth) {
-			return (date.value || textYes);
+		if (date.day === currentDate.day && date.month === currentDate.month) {
+			return date.valueYes || textYes;
 		}
-		return (date.value || textNo);
+		return date.valueNo || textNo;
+	};
+
+	const addDate = () => setDates([...dates, { ...blankDate }]);
+
+	const deleteDate = (index) => {
+		const updatedDates = [...dates];
+		updatedDates.splice(index, 1);
+		setDates(updatedDates);
+	};
+
+	const updateDates = (array) => {
+		localStorage.setItem('dates', JSON.stringify(array));
+		setDates(array);
 	};
 
 	// Only update the date variable if the date changes
@@ -41,25 +55,17 @@ function useDatesProvider() {
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
-	// // Update the text if one of the dates is today
-	// useEffect(() => {
-	// 	// console.log(currentDate);
-
-	// 	dates.forEach((event) => {
-	// 		// console.log(event);
-	// 		const matchDay = event.day === currentDate.day;
-	// 		const matchMonth = event.month === currentDate.month;
-
-	// 		if (matchDay && matchMonth) {
-	// 			setText(event.name);
-	// 		}
-	// 	});
-	// }, [currentDate]); // eslint-disable-line
+	useEffect(() => {
+		if (dates.length === 0) addDate();
+	}, [dates]); // eslint-disable-line
 
 	return {
+		addDate,
 		currentDate,
 		dates,
+		deleteDate,
 		isToday,
+		setDates: updateDates,
 	};
 }
 

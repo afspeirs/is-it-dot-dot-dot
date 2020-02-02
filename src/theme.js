@@ -7,7 +7,4 @@ export default createMuiTheme({
 		},
 		text: '#fff',
 	},
-	zIndex: {
-		appBar: 1350,
-	},
 });
