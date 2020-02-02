@@ -69,71 +69,81 @@ const EditDates = ({ open, handleClose }) => {
 									noValidate
 									autoComplete="off"
 								>
-									<TextField
-										id={nameId}
-										name={nameId}
-										label="Name"
-										className={classes.text}
-										value={date.name}
-										onChange={handleChangeText}
-										inputProps={{
-											'data-idx': index,
-											'data-key': 'name',
-										}}
-									/>
-									<TextField
-										select
-										id={dayId}
-										name={dayId}
-										label="Day"
-										value={date.day}
-										onChange={handleChangeSelect}
-									>
-										{days.map((value) => (
-											<MenuItem key={value} value={value}>{value}</MenuItem>
-										))}
-									</TextField>
-									<TextField
-										select
-										id={monthId}
-										name={monthId}
-										label="Month"
-										value={date.month}
-										onChange={handleChangeSelect}
-									>
-										{months.map((value) => (
-											<MenuItem key={value} value={value}>{value}</MenuItem>
-										))}
-									</TextField>
-									<TextField
-										id={valueYesId}
-										name={valueYesId}
-										label="Default Yes"
-										placeholder="Yes"
-										value={date.valueYes}
-										className={classes.text}
-										onChange={handleChangeText}
-										inputProps={{
-											'data-idx': index,
-											'data-key': 'valueYes',
-										}}
-									/>
-									<TextField
-										id={valueNoId}
-										name={valueNoId}
-										label="Default No"
-										placeholder="No"
-										value={date.valueNo}
-										className={classes.text}
-										onChange={handleChangeText}
-										inputProps={{
-											'data-idx': index,
-											'data-key': 'valueNo',
-										}}
-									/>
-									<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
-										<DeleteIcon />
-									</IconButton>
+									<div className={classes.formContainer}>
+										<div className={classes.formContent}>
+											<TextField
+												id={nameId}
+												name={nameId}
+												label="Name"
+												className={classes.formText}
+												value={date.name}
+												onChange={handleChangeText}
+												inputProps={{
+													'data-idx': index,
+													'data-key': 'name',
+												}}
+											/>
+											<TextField
+												select
+												id={dayId}
+												name={dayId}
+												label="Day"
+												value={date.day}
+												className={classes.formDropdown}
+												onChange={handleChangeSelect}
+											>
+												{days.map((value) => (
+													<MenuItem key={value} value={value}>{value}</MenuItem>
+												))}
+											</TextField>
+											<TextField
+												select
+												id={monthId}
+												name={monthId}
+												label="Month"
+												value={date.month}
+												className={classes.formDropdown}
+												onChange={handleChangeSelect}
+											>
+												{months.map((value) => (
+													<MenuItem key={value} value={value}>{value}</MenuItem>
+												))}
+											</TextField>
+										</div>
+										<div className={classes.formContent}>
+											<TextField
+												id={valueYesId}
+												name={valueYesId}
+												label="Default Yes"
+												placeholder="Yes"
+												value={date.valueYes}
+												className={classes.formText}
+												onChange={handleChangeText}
+												inputProps={{
+													'data-idx': index,
+													'data-key': 'valueYes',
+												}}
+											/>
+											<TextField
+												id={valueNoId}
+												name={valueNoId}
+												label="Default No"
+												placeholder="No"
+												value={date.valueNo}
+												className={classes.formText}
+												onChange={handleChangeText}
+												inputProps={{
+													'data-idx': index,
+													'data-key': 'valueNo',
+												}}
+											/>
+										</div>
+									</div>
+									<div className={classes.formEnd}>
+										<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
+											<DeleteIcon />
+										</IconButton>
+									</div>
 								</form>
 							</React.Fragment>
 						);
