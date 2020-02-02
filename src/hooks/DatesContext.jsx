@@ -17,9 +17,10 @@ export const useDates = () => useContext(DatesContext);
 // Provider hook that creates dates object and handles state
 function useDatesProvider() {
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
-	const [dates, setDates] = useState(localDates);
+	const [dates, setDates] = useState(JSON.parse(localStorage.getItem('dates')) || localDates);
 	const [textYes] = useState('YES');
 	const [textNo] = useState('NO');
+	const blankDate = { day: 1, month: 1, name: '' };
 
 	// Return yes values if today
 	// Return no values if not
@@ -28,6 +29,19 @@ function useDatesProvider() {
 			return date.valueYes || textYes;
 		}
 		return date.valueNo || textNo;
+	};
+
+	const addDate = () => setDates([...dates, { ...blankDate }]);
+
+	const deleteDate = (index) => {
+		const updatedDates = [...dates];
+		updatedDates.splice(index, 1);
+		setDates(updatedDates);
+	};
+
+	const updateDates = (array) => {
+		localStorage.setItem('dates', JSON.stringify(array));
+		setDates(array);
 	};
 
 	// Only update the date variable if the date changes
@@ -41,11 +55,17 @@ function useDatesProvider() {
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
 
+	useEffect(() => {
+		if (dates.length === 0) addDate();
+	}, [dates]); // eslint-disable-line
+
 	return {
+		addDate,
 		currentDate,
 		dates,
+		deleteDate,
 		isToday,
-		setDates,
+		setDates: updateDates,
 	};
 }
 

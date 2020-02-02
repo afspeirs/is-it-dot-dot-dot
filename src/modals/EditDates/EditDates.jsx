@@ -18,19 +18,17 @@ import { useDates } from '../../hooks/DatesContext';
 
 const EditDates = ({ open, handleClose }) => {
 	const classes = useStyles();
-	const { dates, setDates } = useDates();
+	const {
+		addDate,
+		dates,
+		deleteDate,
+		setDates,
+	} = useDates();
 
-	const blankDate = { day: 1, month: 1, name: '' };
 	const days = [...Array(31)].map((e, i) => i + 1);
 	const months = [...Array(12)].map((e, i) => i + 1);
-	const fabDisabled = dates[dates.length - 1].name === '';
+	const fabDisabled = dates[dates.length - 1]?.name === '';
 
-	const addDate = () => setDates([...dates, { ...blankDate }]);
-	const deleteDate = (index) => {
-		const updatedDates = [...dates];
-		updatedDates.splice(index, 1);
-		setDates(updatedDates);
-	};
 	const handleChangeSelect = (event) => {
 		const { name, value } = event.target;
 		const [key, idx] = name.split('-');

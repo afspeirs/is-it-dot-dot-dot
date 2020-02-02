@@ -40,7 +40,7 @@ const Navigation = ({
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" className={classes.title}>
-						{`Is it ${dates[tab].name}?`}
+						{`Is it ${dates[tab]?.name || '...'}?`}
 					</Typography>
 				</Toolbar>
 			</AppBar>
