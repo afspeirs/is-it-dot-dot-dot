@@ -12,11 +12,9 @@ import {
 } from '@material-ui/icons';
 
 import Modal from '../../components/Modal';
+import CheckForUpdate from '../../components/CheckForUpdate';
 
-const Settings = ({
-	open,
-	handleClose,
-}) => (
+const Settings = ({ open, handleClose }) => (
 	<Modal
 		title="Settings"
 		open={open}
@@ -41,6 +39,7 @@ const Settings = ({
 					</IconButton>
 				</ListItemSecondaryAction>
 			</ListItem>
+			<CheckForUpdate />
 		</List>
 	</Modal>
 );
