@@ -10,8 +10,11 @@ import {
 import {
 	Refresh as RefreshIcon,
 } from '@material-ui/icons';
+import { useCheckForUpdate } from '../../hooks/CheckForUpdateContext';
 
 const CheckForUpdate = () => {
+	const { updateAvailable } = useCheckForUpdate();
+
 	const [loading, setLoading] = React.useState(false);
 	const timer = React.useRef();
 

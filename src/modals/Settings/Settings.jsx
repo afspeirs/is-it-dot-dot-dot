@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -27,19 +28,21 @@ const Settings = ({ open, handleClose }) => (
 					{`v${process.env.REACT_APP_VERSION}`}
 				</ListItemSecondaryAction>
 			</ListItem>
+			<CheckForUpdate />
+			<Divider />
 			<ListItem>
 				<ListItemText primary="Clear Dates:" />
 				<ListItemSecondaryAction>
 					<IconButton
-						aria-label="delete"
+						aria-label="clear"
 						color="secondary"
+						edge="end"
 						onClick={() => localStorage.clear()}
 					>
 						<DeleteIcon />
 					</IconButton>
 				</ListItemSecondaryAction>
 			</ListItem>
-			<CheckForUpdate />
 		</List>
 	</Modal>
 );
