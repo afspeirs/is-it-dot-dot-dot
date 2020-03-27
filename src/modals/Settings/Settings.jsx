@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -12,11 +13,9 @@ import {
 } from '@material-ui/icons';
 
 import Modal from '../../components/Modal';
+import CheckForUpdate from '../../components/CheckForUpdate';
 
-const Settings = ({
-	open,
-	handleClose,
-}) => (
+const Settings = ({ open, handleClose }) => (
 	<Modal
 		title="Settings"
 		open={open}
@@ -29,12 +28,15 @@ const Settings = ({
 					{`v${process.env.REACT_APP_VERSION}`}
 				</ListItemSecondaryAction>
 			</ListItem>
+			<CheckForUpdate />
+			<Divider />
 			<ListItem>
 				<ListItemText primary="Clear Dates:" />
 				<ListItemSecondaryAction>
 					<IconButton
-						aria-label="delete"
+						aria-label="clear"
 						color="secondary"
+						edge="end"
 						onClick={() => localStorage.clear()}
 					>
 						<DeleteIcon />
