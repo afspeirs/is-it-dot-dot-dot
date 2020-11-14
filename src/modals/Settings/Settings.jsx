@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons';
 
 import Modal from '../../components/Modal';
+import AppVersion from '../../components/AppVersion';
 import CheckForUpdate from '../../components/CheckForUpdate';
 
 const Settings = ({ open, handleClose }) => (
@@ -22,14 +23,11 @@ const Settings = ({ open, handleClose }) => (
 		handleClose={handleClose}
 	>
 		<List>
-			<ListItem>
-				<ListItemText primary="App version:" />
-				<ListItemSecondaryAction>
-					{`v${process.env.REACT_APP_VERSION}`}
-				</ListItemSecondaryAction>
-			</ListItem>
+			<AppVersion />
 			<CheckForUpdate />
+
 			<Divider />
+
 			<ListItem>
 				<ListItemText primary="Clear Dates:" />
 				<ListItemSecondaryAction>
@@ -51,6 +49,5 @@ Settings.propTypes = {
 	open: PropTypes.bool.isRequired,
 	handleClose: PropTypes.func.isRequired,
 };
-
 
 export default Settings;
