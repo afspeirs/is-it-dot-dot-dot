@@ -1,4 +1,4 @@
-export const getCurrentDate = () => {
+const getCurrentDate = () => {
 	const d = new Date();
 
 	return {
@@ -7,6 +7,4 @@ export const getCurrentDate = () => {
 	};
 };
 
-export default {
-	getCurrentDate,
-};
+export default getCurrentDate;

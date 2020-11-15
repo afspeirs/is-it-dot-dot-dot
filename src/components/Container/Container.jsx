@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import {
 	AppBar,
 	IconButton,
@@ -9,25 +10,33 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
-import useStyles from './Navigation.styled';
+import useStyles from './Container.styled';
 import DrawerContent from '../DrawerContent';
 import { useDates } from '../../hooks/DatesContext';
 
-const Navigation = ({
-	tab,
-	setTab,
-}) => {
+const propTypes = {
+	children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+	]).isRequired,
+};
+
+const Container = ({ children }) => {
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
-	const { dates } = useDates();
+	const { selectedDate } = useDates();
+	const history = useHistory();
 
-	const handleTabChange = (event, newTab) => {
-		setOpen(false);
-		setTab(newTab);
-	};
+	const handleTabChange = () => setOpen(false);
+
+	// Run handleDrawerClose if the history changes
+	useEffect(() => {
+		const unlisten = history.listen(handleTabChange);
+		return unlisten;
+	}, [history]); // eslint-disable-line
 
 	return (
-		<>
+		<div className={classes.container}>
 			<AppBar position="static" elevation={0}>
 				<Toolbar>
 					<IconButton
@@ -39,8 +48,8 @@ const Navigation = ({
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography variant="h6" className={classes.title}>
-						{`Is it ${dates[tab]?.name || '...'}?`}
+					<Typography component="h1" variant="h6" className={classes.title}>
+						{`Is it ${selectedDate?.name || '...'}?`}
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -57,18 +66,14 @@ const Navigation = ({
 				onClose={() => setOpen(false)}
 				ModalProps={{ keepMounted: true }}
 			>
-				<DrawerContent
-					tab={tab}
-					handleTabChange={handleTabChange}
-				/>
+				<DrawerContent />
 			</SwipeableDrawer>
-		</>
+
+			{children}
+		</div>
 	);
 };
 
-Navigation.propTypes = {
-	tab: PropTypes.number.isRequired,
-	setTab: PropTypes.func.isRequired,
-};
+Container.propTypes = propTypes;
 
-export default Navigation;
+export default Container;

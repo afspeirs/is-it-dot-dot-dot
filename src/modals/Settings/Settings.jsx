@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
+	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -12,29 +12,24 @@ import {
 } from '@material-ui/icons';
 
 import Modal from '../../components/Modal';
+import AppVersion from '../../components/AppVersion';
+import CheckForUpdate from '../../components/CheckForUpdate';
 
-const Settings = ({
-	open,
-	handleClose,
-}) => (
-	<Modal
-		title="Settings"
-		open={open}
-		handleClose={handleClose}
-	>
+const Settings = () => (
+	<Modal title="Settings">
 		<List>
-			<ListItem>
-				<ListItemText primary="App version:" />
-				<ListItemSecondaryAction>
-					{`v${process.env.REACT_APP_VERSION}`}
-				</ListItemSecondaryAction>
-			</ListItem>
+			<AppVersion />
+			<CheckForUpdate />
+
+			<Divider />
+
 			<ListItem>
 				<ListItemText primary="Clear Dates:" />
 				<ListItemSecondaryAction>
 					<IconButton
-						aria-label="delete"
+						aria-label="clear"
 						color="secondary"
+						edge="end"
 						onClick={() => localStorage.clear()}
 					>
 						<DeleteIcon />
@@ -44,11 +39,5 @@ const Settings = ({
 		</List>
 	</Modal>
 );
-
-Settings.propTypes = {
-	open: PropTypes.bool.isRequired,
-	handleClose: PropTypes.func.isRequired,
-};
-
 
 export default Settings;

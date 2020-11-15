@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
 	List,
 	ListItem,
@@ -15,19 +15,14 @@ import {
 } from '@material-ui/icons';
 
 import useStyles from './DrawerContent.styled';
-import EditDates from '../../modals/EditDates';
-import Settings from '../../modals/Settings';
+import AdapterLink from '../AdapterLink';
 import { useDates } from '../../hooks/DatesContext';
+import { toKebabCase } from '../../utils';
 
-const DrawerContent = ({ tab, handleTabChange }) => {
+const DrawerContent = () => {
 	const classes = useStyles();
 	const { dates } = useDates();
-	const [openEditDates, setOpenEditDates] = useState(false);
-	const [openSettings, setOpenSettings] = useState(false);
-	const handleOpenEditDates = () => setOpenEditDates(true);
-	const handleCloseEditDates = () => setOpenEditDates(false);
-	const handleOpenSettings = () => setOpenSettings(true);
-	const handleCloseSettings = () => setOpenSettings(false);
+	const location = useLocation();
 	// console.log(dates);
 
 	return (
@@ -35,17 +30,16 @@ const DrawerContent = ({ tab, handleTabChange }) => {
 			<Tabs
 				orientation="vertical"
 				variant="scrollable"
-				value={tab}
-				onChange={handleTabChange}
-				aria-label="Vertical tabs example"
+				value={!location?.state?.modal && location.pathname}
 				className={classes.list}
 			>
-				{dates.map((date, index) => (
+				{dates.map((date) => (
 					<Tab
-						label={date.name}
 						key={date.name}
-						id={`vertical-tab-${index}`}
-						aria-controls={`vertical-tabpanel-${index}`}
+						label={date.name}
+						component={Link}
+						to={`/${toKebabCase(date.name)}/`}
+						value={`/${toKebabCase(date.name)}/`}
 					/>
 				))}
 			</Tabs>
@@ -60,35 +54,35 @@ const DrawerContent = ({ tab, handleTabChange }) => {
 			</List>
 
 			<List disablePadding>
-				<ListItem button onClick={handleOpenEditDates}>
+				<ListItem
+					button
+					component={AdapterLink}
+					to={{
+						pathname: '/edit-dates/',
+						state: { modal: true },
+					}}
+				>
 					<ListItemIcon>
 						<EditIcon />
 					</ListItemIcon>
 					<ListItemText primary="Edit Dates" />
 				</ListItem>
-				<ListItem button onClick={handleOpenSettings}>
+				<ListItem
+					button
+					component={AdapterLink}
+					to={{
+						pathname: '/settings/',
+						state: { modal: true },
+					}}
+				>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
 					<ListItemText primary="Settings" />
 				</ListItem>
 			</List>
-
-			<EditDates
-				open={openEditDates}
-				handleClose={handleCloseEditDates}
-			/>
-			<Settings
-				open={openSettings}
-				handleClose={handleCloseSettings}
-			/>
 		</>
 	);
-};
-
-DrawerContent.propTypes = {
-	tab: PropTypes.number.isRequired,
-	handleTabChange: PropTypes.func.isRequired,
 };
 
 export default DrawerContent;

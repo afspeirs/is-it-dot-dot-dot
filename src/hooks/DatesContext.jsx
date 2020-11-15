@@ -7,7 +7,7 @@ import React, {
 import PropTypes from 'prop-types';
 
 import localDates from '../dates';
-import { getCurrentDate } from '../utils';
+import { getCurrentDate, toKebabCase } from '../utils';
 
 const DatesContext = createContext();
 
@@ -16,6 +16,7 @@ export const useDates = () => useContext(DatesContext);
 
 // Provider hook that creates dates object and handles state
 function useDatesProvider() {
+	const [selectedDate, setSelectedDate] = useState();
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
 	const [dates, setDates] = useState(JSON.parse(localStorage.getItem('dates')) || localDates);
 	const [textYes] = useState('YES');
@@ -44,6 +45,14 @@ function useDatesProvider() {
 		setDates(array);
 	};
 
+	const getDateFromSlug = (slug) => dates
+		.find((date) => toKebabCase(date.name) === slug);
+
+	const updateSelectedDate = (slug) => {
+		const newDate = getDateFromSlug(slug);
+		setSelectedDate(newDate);
+	};
+
 	// Only update the date variable if the date changes
 	useEffect(() => {
 		const now = getCurrentDate();
@@ -65,7 +74,9 @@ function useDatesProvider() {
 		dates,
 		deleteDate,
 		isToday,
+		selectedDate,
 		setDates: updateDates,
+		setSelectedDate: updateSelectedDate,
 	};
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
 	Fab,
 	Divider,
@@ -16,7 +15,7 @@ import useStyles from './EditDates.styled';
 import Modal from '../../components/Modal';
 import { useDates } from '../../hooks/DatesContext';
 
-const EditDates = ({ open, handleClose }) => {
+const EditDates = () => {
 	const classes = useStyles();
 	const {
 		addDate,
@@ -46,125 +45,117 @@ const EditDates = ({ open, handleClose }) => {
 	return (
 		<Modal
 			title="Edit Dates"
-			open={open}
-			handleClose={handleClose}
+			maxHeight
 		>
-			<>
-				<div className={classes.spacer}>
-					{dates.map((date, index) => {
-						const nameId = `name-${index}`;
-						const dayId = `day-${index}`;
-						const monthId = `month-${index}`;
-						const valueYesId = `valueYes-${index}`;
-						const valueNoId = `valueNo-${index}`;
+			<div className={classes.spacer}>
+				{dates.map((date, index) => {
+					const nameId = `name-${index}`;
+					const dayId = `day-${index}`;
+					const monthId = `month-${index}`;
+					const valueYesId = `valueYes-${index}`;
+					const valueNoId = `valueNo-${index}`;
 
-						return (
-							// eslint-disable-next-line react/no-array-index-key
-							<React.Fragment key={`date-${index}`}>
-								{index !== 0 && <Divider />}
-								<form
-									className={classes.root}
-									noValidate
-									autoComplete="off"
-								>
-									<div className={classes.formContainer}>
-										<div className={classes.formContent}>
-											<TextField
-												id={nameId}
-												name={nameId}
-												label="Name"
-												className={classes.formText}
-												value={date.name}
-												onChange={handleChangeText}
-												inputProps={{
-													'data-idx': index,
-													'data-key': 'name',
-												}}
-											/>
-											<TextField
-												select
-												id={dayId}
-												name={dayId}
-												label="Day"
-												value={date.day}
-												className={classes.formDropdown}
-												onChange={handleChangeSelect}
-											>
-												{days.map((value) => (
-													<MenuItem key={value} value={value}>{value}</MenuItem>
-												))}
-											</TextField>
-											<TextField
-												select
-												id={monthId}
-												name={monthId}
-												label="Month"
-												value={date.month}
-												className={classes.formDropdown}
-												onChange={handleChangeSelect}
-											>
-												{months.map((value) => (
-													<MenuItem key={value} value={value}>{value}</MenuItem>
-												))}
-											</TextField>
-										</div>
-										<div className={classes.formContent}>
-											<TextField
-												id={valueYesId}
-												name={valueYesId}
-												label="Default Yes"
-												placeholder="Yes"
-												value={date.valueYes}
-												className={classes.formText}
-												onChange={handleChangeText}
-												inputProps={{
-													'data-idx': index,
-													'data-key': 'valueYes',
-												}}
-											/>
-											<TextField
-												id={valueNoId}
-												name={valueNoId}
-												label="Default No"
-												placeholder="No"
-												value={date.valueNo}
-												className={classes.formText}
-												onChange={handleChangeText}
-												inputProps={{
-													'data-idx': index,
-													'data-key': 'valueNo',
-												}}
-											/>
-										</div>
+					return (
+						// eslint-disable-next-line react/no-array-index-key
+						<React.Fragment key={`date-${index}`}>
+							{index !== 0 && <Divider />}
+							<form
+								className={classes.root}
+								noValidate
+								autoComplete="off"
+							>
+								<div className={classes.formContainer}>
+									<div className={classes.formContent}>
+										<TextField
+											id={nameId}
+											name={nameId}
+											label="Name"
+											className={classes.formText}
+											value={date.name}
+											onChange={handleChangeText}
+											inputProps={{
+												'data-idx': index,
+												'data-key': 'name',
+											}}
+										/>
+										<TextField
+											select
+											id={dayId}
+											name={dayId}
+											label="Day"
+											value={date.day}
+											className={classes.formDropdown}
+											onChange={handleChangeSelect}
+										>
+											{days.map((value) => (
+												<MenuItem key={value} value={value}>{value}</MenuItem>
+											))}
+										</TextField>
+										<TextField
+											select
+											id={monthId}
+											name={monthId}
+											label="Month"
+											value={date.month}
+											className={classes.formDropdown}
+											onChange={handleChangeSelect}
+										>
+											{months.map((value) => (
+												<MenuItem key={value} value={value}>{value}</MenuItem>
+											))}
+										</TextField>
 									</div>
-									<div className={classes.formEnd}>
-										<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
-											<DeleteIcon />
-										</IconButton>
+									<div className={classes.formContent}>
+										<TextField
+											id={valueYesId}
+											name={valueYesId}
+											label="Default Yes"
+											placeholder="Yes"
+											value={date.valueYes}
+											className={classes.formText}
+											onChange={handleChangeText}
+											inputProps={{
+												'data-idx': index,
+												'data-key': 'valueYes',
+											}}
+										/>
+										<TextField
+											id={valueNoId}
+											name={valueNoId}
+											label="Default No"
+											placeholder="No"
+											value={date.valueNo}
+											className={classes.formText}
+											onChange={handleChangeText}
+											inputProps={{
+												'data-idx': index,
+												'data-key': 'valueNo',
+											}}
+										/>
 									</div>
-								</form>
-							</React.Fragment>
-						);
-					})}
-				</div>
+								</div>
+								<div className={classes.formEnd}>
+									<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
+										<DeleteIcon />
+									</IconButton>
+								</div>
+							</form>
+						</React.Fragment>
+					);
+				})}
+			</div>
 
-				<Fab
-					color="primary"
-					aria-label="add"
-					className={classes.fab}
-					disabled={fabDisabled}
-					onClick={addDate}
-				>
-					<AddIcon />
-				</Fab>
-			</>
+			<Fab
+				color="primary"
+				aria-label="add"
+				className={classes.fab}
+				disabled={fabDisabled}
+				onClick={addDate}
+			>
+				<AddIcon />
+			</Fab>
 		</Modal>
 	);
-};
-
-EditDates.propTypes = {
-	open: PropTypes.bool.isRequired,
-	handleClose: PropTypes.func.isRequired,
 };
 
 export default EditDates;
