@@ -1,14 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-	accountIcon: {
-		width: '100%',
-		height: '100%',
-	},
-	appbar: {
+	root: (props) => ({
+		height: props.maxHeight ? '100%' : '',
+	}),
+	appBar: {
 		position: 'relative',
 	},
 	children: {
+		display: 'flex',
+		flexDirection: 'column',
+		height: '100%',
 		overflowY: 'auto',
 	},
 	menuButton: {
@@ -16,7 +18,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flex: 1,
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
+		whiteSpace: 'nowrap',
 	},
-}));
+}), {
+	name: 'Modal',
+});
 
 export default useStyles;

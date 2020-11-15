@@ -20,4 +20,9 @@ export default [
 		month: 12,
 		name: 'Christmas Day',
 	},
+	{
+		day: 15,
+		month: 11,
+		name: 'Test Day',
+	},
 ];

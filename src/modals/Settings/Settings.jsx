@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
 	Divider,
 	IconButton,
@@ -16,12 +15,8 @@ import Modal from '../../components/Modal';
 import AppVersion from '../../components/AppVersion';
 import CheckForUpdate from '../../components/CheckForUpdate';
 
-const Settings = ({ open, handleClose }) => (
-	<Modal
-		title="Settings"
-		open={open}
-		handleClose={handleClose}
-	>
+const Settings = () => (
+	<Modal title="Settings">
 		<List>
 			<AppVersion />
 			<CheckForUpdate />
@@ -44,10 +39,5 @@ const Settings = ({ open, handleClose }) => (
 		</List>
 	</Modal>
 );
-
-Settings.propTypes = {
-	open: PropTypes.bool.isRequired,
-	handleClose: PropTypes.func.isRequired,
-};
 
 export default Settings;

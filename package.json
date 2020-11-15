@@ -13,9 +13,10 @@
     "cross-cat": "^1.0.0",
     "material-ui-snackbar-provider": "^1.4.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "^4.0.0"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.4"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.2.1"
