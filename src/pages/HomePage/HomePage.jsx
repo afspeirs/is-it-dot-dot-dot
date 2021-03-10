@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 
 import useStyles from './HomePage.styled';
-import { useDates } from '../../hooks/DatesContext';
+import { useDates } from '../../hooks/Dates';
 import { toKebabCase } from '../../utils';
 
 const HomePage = () => {

@@ -5,10 +5,10 @@ import {
 	useLocation,
 } from 'react-router-dom';
 
-import EditDates from '../../modals/EditDates';
-import Settings from '../../modals/Settings';
+import EditDatesPage from '../../pages/EditDatesPage';
 import HomePage from '../../pages/HomePage';
 import NoPage from '../../pages/NoPage';
+import SettingsPage from '../../pages/SettingsPage';
 
 const Routes = () => {
 	const location = useLocation();
@@ -41,8 +41,8 @@ const Routes = () => {
 
 			{isModal && (
 				<Switch>
-					<Route path="/edit-dates/" component={EditDates} />
-					<Route path="/settings/" component={Settings} />
+					<Route path="/edit-dates/" component={EditDatesPage} />
+					<Route path="/settings/" component={SettingsPage} />
 				</Switch>
 			)}
 		</>

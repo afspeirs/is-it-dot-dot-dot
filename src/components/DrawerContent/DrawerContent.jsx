@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
+	Divider,
 	List,
 	ListItem,
 	ListItemIcon,
@@ -15,8 +16,8 @@ import {
 } from '@material-ui/icons';
 
 import useStyles from './DrawerContent.styled';
-import AdapterLink from '../AdapterLink';
-import { useDates } from '../../hooks/DatesContext';
+import RouterNavLink from '../shared/RouterNavLink';
+import { useDates } from '../../hooks/Dates';
 import { toKebabCase } from '../../utils';
 
 const DrawerContent = () => {
@@ -53,10 +54,12 @@ const DrawerContent = () => {
 				</ListItem>
 			</List>
 
+			<Divider />
+
 			<List disablePadding>
 				<ListItem
 					button
-					component={AdapterLink}
+					component={RouterNavLink}
 					to={{
 						pathname: '/edit-dates/',
 						state: { modal: true },
@@ -69,7 +72,7 @@ const DrawerContent = () => {
 				</ListItem>
 				<ListItem
 					button
-					component={AdapterLink}
+					component={RouterNavLink}
 					to={{
 						pathname: '/settings/',
 						state: { modal: true },

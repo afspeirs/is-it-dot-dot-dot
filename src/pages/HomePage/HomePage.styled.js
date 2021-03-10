@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		alignItems: 'center',
 		color: theme.palette.text,
+		backgroundColor: theme.palette.primary.main,
 		zIndex: -1,
 	},
 	typography: {

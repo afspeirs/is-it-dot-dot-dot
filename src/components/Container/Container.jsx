@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import {
 	AppBar,
@@ -12,7 +13,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 
 import useStyles from './Container.styled';
 import DrawerContent from '../DrawerContent';
-import { useDates } from '../../hooks/DatesContext';
+import { useDates } from '../../hooks/Dates';
 
 const propTypes = {
 	children: PropTypes.oneOfType([
@@ -37,6 +38,10 @@ const Container = ({ children }) => {
 
 	return (
 		<div className={classes.container}>
+			<Helmet>
+				<title>{`Is it ${selectedDate?.name || '...'}?`}</title>
+			</Helmet>
+
 			<AppBar position="static" elevation={0}>
 				<Toolbar>
 					<IconButton
