@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useConfirm } from 'material-ui-confirm';
 
 import localDates from '@/dates';
 import { getCurrentDate, toKebabCase } from '@/utils';
 
 const DatesValue = () => {
+	const confirm = useConfirm();
 	const history = useHistory();
 	const [selectedDate, setSelectedDate] = useState();
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
@@ -23,7 +25,7 @@ const DatesValue = () => {
 	};
 
 	const addDate = (date, redirect = false) => {
-		const existingDate = dates.find((el) => el.name === date.name);
+		const existingDate = dates.find((el) => el.name === date?.name);
 		const duplicateText = 'DUPLICATE';
 
 		if (existingDate) {
@@ -45,9 +47,16 @@ const DatesValue = () => {
 	};
 
 	const deleteDate = (index) => {
-		const updatedDates = [...dates];
-		updatedDates.splice(index, 1);
-		setDates(updatedDates);
+		confirm({
+			title: `Are you sure you want to delete "${dates[index].name}"?`,
+			cancellationText: 'No',
+			confirmationText: 'Yes',
+		})
+			.then(() => {
+				const updatedDates = [...dates];
+				updatedDates.splice(index, 1);
+				setDates(updatedDates);
+			});
 	};
 
 	const resetDates = () => {
