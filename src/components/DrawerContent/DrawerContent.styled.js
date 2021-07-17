@@ -1,14 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
 	list: {
 		flexGrow: 1,
 		overflowY: 'auto',
 		overflowX: 'hidden',
-		'& .MuiTabs-indicator': {
-			backgroundColor: 'rgba(0, 0, 0, 0.15)',
-			width: '100%',
-			zIndex: -1,
+		backgroundColor: theme.palette.background.paper,
+	},
+	listItem: {
+		'&.active': {
+			backgroundColor: theme.palette.action.focus,
 		},
 	},
 }));
