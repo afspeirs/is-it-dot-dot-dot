@@ -1,6 +1,6 @@
 {
   "name": "is-it-dot-dot-dot",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "scripts": {
     "start": "vite",
     "build": "vite build",
