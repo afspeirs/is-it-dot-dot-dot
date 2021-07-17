@@ -45,9 +45,9 @@ const Container = ({ children }) => {
 					.catch(console.error); // eslint-disable-line no-console
 			},
 			text: 'Search Notes',
-			hidden: !navigator.share,
+			visible: Boolean(navigator.share),
 		},
-	];
+	].filter((item) => item.visible !== false);
 
 	// Close drawer only in mobile
 	const handleDrawerClose = () => setDrawerOpen(false);
