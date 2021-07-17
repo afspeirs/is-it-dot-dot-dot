@@ -1,2 +1,2 @@
+export { useDates } from './DatesContext';
 export { default as DatesProvider } from './DatesProvider';
-export { default as useDates } from './useDates';

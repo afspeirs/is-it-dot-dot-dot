@@ -3,7 +3,6 @@ const theme = {
 		primary: {
 			main: '#464',
 		},
-		text: '#fff',
 	},
 };
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import localDates from '../../dates';
-import { getCurrentDate, toKebabCase } from '../../utils';
+import localDates from '@/dates';
+import { getCurrentDate, toKebabCase } from '@/utils';
 
 const DatesValue = () => {
 	const [selectedDate, setSelectedDate] = useState();
@@ -26,6 +26,11 @@ const DatesValue = () => {
 		const updatedDates = [...dates];
 		updatedDates.splice(index, 1);
 		setDates(updatedDates);
+	};
+
+	const resetDates = () => {
+		localStorage.removeItem('dates');
+		setDates(localDates);
 	};
 
 	const updateDates = (array) => {
@@ -62,6 +67,7 @@ const DatesValue = () => {
 		dates,
 		deleteDate,
 		isToday,
+		resetDates,
 		selectedDate,
 		setDates: updateDates,
 		setSelectedDate: updateSelectedDate,

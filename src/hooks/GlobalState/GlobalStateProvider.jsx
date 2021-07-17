@@ -1,8 +1,8 @@
 import { useReducer } from 'react';
 import PropTypes from 'prop-types';
 
+import { initialState, reducer } from '@/reducer';
 import GlobalStateContext from './GlobalStateContext';
-import { initialState, reducer } from '../../reducer';
 
 const propTypes = {
 	children: PropTypes.node.isRequired,

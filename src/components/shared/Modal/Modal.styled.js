@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-	root: (props) => ({
+	paper: (props) => ({
 		height: props.maxHeight ? '100%' : '',
 	}),
 	appBar: {
@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flex: 1,
-		overflow: 'hidden',
-		textOverflow: 'ellipsis',
-		whiteSpace: 'nowrap',
 		userSelect: 'none',
 	},
 }), {

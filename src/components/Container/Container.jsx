@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import {
 	AppBar,
 	IconButton,
-	SwipeableDrawer,
+	Drawer,
 	Toolbar,
 	Typography,
 } from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons';
+import {
+	Menu as MenuIcon,
+} from '@material-ui/icons';
 
+import DrawerContent from '@/components/DrawerContent';
+import { useDates } from '@/hooks/Dates';
+import { useHotkeys } from '@/hooks/Hotkeys';
 import useStyles from './Container.styled';
-import DrawerContent from '../DrawerContent';
-import { useDates } from '../../hooks/Dates';
 
 const propTypes = {
 	children: PropTypes.oneOfType([
@@ -23,18 +26,40 @@ const propTypes = {
 };
 
 const Container = ({ children }) => {
-	const classes = useStyles();
-	const [open, setOpen] = useState(false);
 	const { selectedDate } = useDates();
 	const history = useHistory();
+	const classes = useStyles();
+	const [drawerOpen, setDrawerOpen] = useState(false);
 
-	const handleTabChange = () => setOpen(false);
+	// Close drawer only in mobile
+	const handleDrawerClose = () => setDrawerOpen(false);
+
+	// Toggle drawer only in mobile unless toggle is true
+	const handleDrawerToggle = () => setDrawerOpen((prevState) => !prevState);
+
+	useHotkeys([
+		// B = Toggle sidebar
+		{
+			keys: ['b'],
+			callback: (event) => {
+				event.preventDefault();
+				setDrawerOpen((prevState) => !prevState);
+			},
+			metaModifier: true,
+		},
+		// P or S = Disable Event
+		{
+			keys: ['p', 's'],
+			callback: (event) => event.preventDefault(),
+			metaModifier: true,
+		},
+	]);
 
 	// Run handleDrawerClose if the history changes
 	useEffect(() => {
-		const unlisten = history.listen(handleTabChange);
+		const unlisten = history.listen(handleDrawerClose);
 		return unlisten;
-	}, [history]); // eslint-disable-line
+	}, [history]);
 
 	return (
 		<div className={classes.container}>
@@ -42,37 +67,36 @@ const Container = ({ children }) => {
 				<title>{`Is it ${selectedDate?.name || '...'}?`}</title>
 			</Helmet>
 
-			<AppBar position="static" elevation={0}>
+			<AppBar elevation={0}>
 				<Toolbar>
 					<IconButton
-						edge="start"
 						className={classes.menuButton}
 						color="inherit"
-						aria-label="menu"
-						onClick={() => setOpen(true)}
+						aria-label="Open drawer"
+						edge="start"
+						onClick={handleDrawerToggle}
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography component="h1" variant="h6" className={classes.title}>
+					<Typography className={classes.title} component="h1" variant="h6" noWrap>
 						{`Is it ${selectedDate?.name || '...'}?`}
 					</Typography>
 				</Toolbar>
 			</AppBar>
 
-			<SwipeableDrawer
+			<Drawer
 				variant="temporary"
 				anchor="left"
-				open={open}
+				open={drawerOpen}
 				className={classes.drawer}
 				classes={{
 					paper: classes.drawerPaper,
 				}}
-				onOpen={() => setOpen(true)}
-				onClose={() => setOpen(false)}
+				onClose={handleDrawerClose}
 				ModalProps={{ keepMounted: true }}
 			>
 				<DrawerContent />
-			</SwipeableDrawer>
+			</Drawer>
 
 			{children}
 		</div>

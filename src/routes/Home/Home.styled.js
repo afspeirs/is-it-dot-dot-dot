@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
 	root: {
 		position: 'absolute',
 		top: 0,
@@ -10,14 +10,12 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		color: theme.palette.text,
-		backgroundColor: theme.palette.primary.main,
-		zIndex: -1,
 	},
 	typography: {
 		fontSize: '100px',
 		fontWeight: 'bold',
+		color: '#fff',
 	},
-}));
+});
 
 export default useStyles;

@@ -11,11 +11,11 @@ import {
 	Delete as DeleteIcon,
 } from '@material-ui/icons';
 
-import useStyles from './EditDatesPage.styled';
-import Modal from '../../components/shared/Modal';
-import { useDates } from '../../hooks/Dates';
+import Modal from '@/components/shared/Modal';
+import { useDates } from '@/hooks/Dates';
+import useStyles from './EditDates.styled';
 
-const EditDatesPage = () => {
+const EditDates = () => {
 	const classes = useStyles();
 	const {
 		addDate,
@@ -45,6 +45,7 @@ const EditDatesPage = () => {
 	return (
 		<Modal
 			title="Edit Dates"
+			titleDocument="Is it editing the Dates?"
 			maxHeight
 		>
 			<div className={classes.spacer}>
@@ -158,4 +159,4 @@ const EditDatesPage = () => {
 	);
 };
 
-export default EditDatesPage;
+export default EditDates;

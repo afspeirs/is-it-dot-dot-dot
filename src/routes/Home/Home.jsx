@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams, useLocation } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 
-import useStyles from './HomePage.styled';
-import { useDates } from '../../hooks/Dates';
-import { toKebabCase } from '../../utils';
+import { isModal } from '@/components/Routes';
+import { useDates } from '@/hooks/Dates';
+import { toKebabCase } from '@/utils';
+import useStyles from './Home.styled';
 
 const HomePage = () => {
 	const classes = useStyles();
 	const { name } = useParams();
+	const { pathname } = useLocation();
 	const {
 		dates,
 		isToday,
@@ -17,6 +19,8 @@ const HomePage = () => {
 	} = useDates();
 
 	useEffect(() => {
+		if (isModal(pathname)) return; // Disable functionally when on a modal page.
+
 		setSelectedDate(name);
 	}, [name]); // eslint-disable-line
 

@@ -17,8 +17,8 @@ import {
 	Close as CloseIcon,
 } from '@material-ui/icons';
 
+import HeaderContent from '@/components/shared/HeaderContent';
 import useStyles from './Modal.styled';
-import HeaderContent from '../HeaderContent';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Transition = forwardRef((props, ref) => <Slide ref={ref} {...props} />);
@@ -30,7 +30,7 @@ const defaultProps = {
 	maxWidth: 'sm',
 	showPrompt: false,
 	title: '',
-	titleDocument: null,
+	titleDocument: undefined,
 };
 
 const propTypes = {
@@ -86,7 +86,7 @@ const Modal = ({
 	return (
 		<>
 			<Helmet>
-				<title>{titleDocument || `${title} | ${process.env.REACT_APP_TITLE}`}</title>
+				<title>{titleDocument || `${title} | ${import.meta.env.VITE_APP_TITLE}`}</title>
 			</Helmet>
 
 			<Dialog
@@ -100,7 +100,7 @@ const Modal = ({
 				onClose={handleClose}
 				open={open}
 				PaperProps={{
-					className: classes.root,
+					className: classes.paper,
 				}}
 				TransitionComponent={Transition}
 				TransitionProps={{
@@ -124,6 +124,7 @@ const Modal = ({
 							className={classes.title}
 							component="h2"
 							id={`${title}-modal-title`}
+							noWrap
 							variant="h6"
 						>
 							{title}
