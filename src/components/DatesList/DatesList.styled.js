@@ -5,12 +5,17 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		overflowY: 'auto',
 		overflowX: 'hidden',
-		backgroundColor: theme.palette.background.paper,
 	},
 	listItem: {
 		'&.active': {
 			backgroundColor: theme.palette.action.focus,
 		},
+	},
+	listSubheader: {
+		userSelect: 'none',
+	},
+	subheader: {
+		backgroundColor: theme.palette.background.paper,
 	},
 }));
 

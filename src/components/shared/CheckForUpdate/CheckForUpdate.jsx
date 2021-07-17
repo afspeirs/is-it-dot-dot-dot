@@ -11,8 +11,8 @@ import {
 	SystemUpdate as SystemUpdateIcon,
 } from '@material-ui/icons';
 
+import { useGlobalState } from '@/hooks/GlobalState';
 import useStyles from './CheckForUpdate.styled';
-import { useGlobalState } from '../../../hooks/GlobalState';
 
 const CheckForUpdate = () => {
 	const [{ updateAvailable }] = useGlobalState();

@@ -14,7 +14,7 @@ const AppVersion = () => (
 		</ListItemIcon>
 		<ListItemText
 			primary="App version"
-			secondary={process.env.REACT_APP_VERSION}
+			secondary={import.meta.env.PACKAGE_VERSION}
 		/>
 	</ListItem>
 );

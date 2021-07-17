@@ -1,7 +1,7 @@
 const initialState = {
 	beforeInstallPrompt: null,
 	settings: {
-		appTheme: localStorage.getItem('settings-appTheme') || 'default',
+		appTheme: JSON.parse(localStorage.getItem('settings-appTheme')) || 'default',
 	},
 	updateAvailable: false,
 };

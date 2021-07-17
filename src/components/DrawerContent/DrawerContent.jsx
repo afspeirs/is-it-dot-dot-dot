@@ -1,13 +1,9 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
 import {
 	Divider,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	Tab,
-	Tabs,
 	Typography,
 } from '@material-ui/core';
 import {
@@ -15,68 +11,61 @@ import {
 	Settings as SettingsIcon,
 } from '@material-ui/icons';
 
+import DatesList from '@/components/DatesList';
+import RouterLink from '@/components/shared/RouterLink';
 import useStyles from './DrawerContent.styled';
-import RouterNavLink from '../shared/RouterNavLink';
-import { useDates } from '../../hooks/Dates';
-import { toKebabCase } from '../../utils';
 
 const DrawerContent = () => {
 	const classes = useStyles();
-	const { dates } = useDates();
-	const location = useLocation();
-	// console.log(dates);
 
 	return (
 		<>
-			<Tabs
-				orientation="vertical"
-				variant="scrollable"
-				value={!location?.state?.modal && location.pathname}
-				className={classes.list}
-			>
-				{dates.map((date) => (
-					<Tab
-						key={date.name}
-						label={date.name}
-						component={RouterNavLink}
-						to={`/${toKebabCase(date.name)}/`}
-						value={`/${toKebabCase(date.name)}/`}
+			<List className={classes.list} disablePadding>
+				<ListItem>
+					<ListItemText
+						primary={import.meta.env.VITE_APP_TITLE}
+						primaryTypographyProps={{
+							color: 'textSecondary',
+							component: 'h1',
+							variant: 'h5',
+						}}
+						secondary={import.meta.env.PACKAGE_VERSION}
+						secondaryTypographyProps={{
+							component: 'span',
+						}}
 					/>
-				))}
-			</Tabs>
+				</ListItem>
 
-			<List>
+				<DatesList />
+			</List>
+
+			<Divider />
+
+			<List disablePadding>
 				<ListItem>
 					<Typography variant="body2">This app informs you if it is the date specified</Typography>
 				</ListItem>
 				<ListItem>
 					<Typography variant="body2">Add a date to show it in the list below</Typography>
 				</ListItem>
-			</List>
 
-			<Divider />
+				<Divider />
 
-			<List disablePadding>
 				<ListItem
 					button
-					component={RouterNavLink}
-					to={{
-						pathname: '/edit-dates/',
-						state: { modal: true },
-					}}
+					component={RouterLink}
+					to="/edit-dates/"
 				>
 					<ListItemIcon>
 						<EditIcon />
 					</ListItemIcon>
 					<ListItemText primary="Edit Dates" />
 				</ListItem>
+
 				<ListItem
 					button
-					component={RouterNavLink}
-					to={{
-						pathname: '/settings/',
-						state: { modal: true },
-					}}
+					component={RouterLink}
+					to="/settings/"
 				>
 					<ListItemIcon>
 						<SettingsIcon />
