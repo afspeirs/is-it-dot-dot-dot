@@ -10,12 +10,12 @@ import { useConfirm } from 'material-ui-confirm';
 
 import { useDates } from '@/hooks/Dates';
 
-const CheckForUpdate = () => {
+const ResetDates = () => {
 	const confirm = useConfirm();
 	const { resetDates } = useDates();
 
 	const handleClick = () => confirm({
-		title: 'Are you sure you want to clear the save dates?',
+		title: 'Are you sure you want to reset the saved dates?',
 		cancellationText: 'No',
 		confirmationText: 'Yes',
 	})
@@ -26,9 +26,9 @@ const CheckForUpdate = () => {
 			<ListItemIcon>
 				<DeleteIcon />
 			</ListItemIcon>
-			<ListItemText primary="Clear saved Dates" />
+			<ListItemText primary="Reset Dates" />
 		</ListItem>
 	);
 };
 
-export default CheckForUpdate;
+export default ResetDates;
