@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
 	Divider,
 	List,
@@ -38,7 +38,7 @@ const DrawerContent = () => {
 					<Tab
 						key={date.name}
 						label={date.name}
-						component={Link}
+						component={RouterNavLink}
 						to={`/${toKebabCase(date.name)}/`}
 						value={`/${toKebabCase(date.name)}/`}
 					/>
