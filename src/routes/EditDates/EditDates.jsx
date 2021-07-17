@@ -26,7 +26,7 @@ const EditDates = () => {
 
 	const days = [...Array(31)].map((e, i) => i + 1);
 	const months = [...Array(12)].map((e, i) => i + 1);
-	const fabDisabled = dates[dates.length - 1]?.name === '';
+	const fabDisabled = dates.find((date) => date.name === '');
 
 	const handleChangeSelect = (event) => {
 		const { name, value } = event.target;
