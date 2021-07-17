@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import {
@@ -11,9 +12,11 @@ import {
 } from '@material-ui/core';
 import {
 	Menu as MenuIcon,
+	Share as ShareIcon,
 } from '@material-ui/icons';
 
 import DrawerContent from '@/components/DrawerContent';
+import HeaderContent from '@/components/shared/HeaderContent';
 import { useDates } from '@/hooks/Dates';
 import { useHotkeys } from '@/hooks/Hotkeys';
 import useStyles from './Container.styled';
@@ -30,6 +33,21 @@ const Container = ({ children }) => {
 	const history = useHistory();
 	const classes = useStyles();
 	const [drawerOpen, setDrawerOpen] = useState(false);
+
+	const headerItems = [
+		{
+			icon: <ShareIcon />,
+			onClick: () => {
+				navigator.share({
+					title: `Is it ${selectedDate.name}`,
+					url: `${document.location.origin}/?${queryString.stringify(selectedDate)}`,
+				})
+					.catch(console.error); // eslint-disable-line no-console
+			},
+			text: 'Search Notes',
+			hidden: !navigator.share,
+		},
+	];
 
 	// Close drawer only in mobile
 	const handleDrawerClose = () => setDrawerOpen(false);
@@ -81,6 +99,11 @@ const Container = ({ children }) => {
 					<Typography className={classes.title} component="h1" variant="h6" noWrap>
 						{`Is it ${selectedDate?.name || '...'}?`}
 					</Typography>
+					<HeaderContent
+						forceLastIconEdge
+						headerItems={headerItems}
+						disableOverflowMenu
+					/>
 				</Toolbar>
 			</AppBar>
 
