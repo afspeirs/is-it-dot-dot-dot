@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import queryString from 'query-string';
 import { Redirect, useParams, useLocation } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 
@@ -10,18 +11,26 @@ import useStyles from './Home.styled';
 const HomePage = () => {
 	const classes = useStyles();
 	const { name } = useParams();
-	const { pathname } = useLocation();
+	const { pathname, search } = useLocation();
 	const {
+		addDate,
 		dates,
 		isToday,
 		selectedDate,
 		setSelectedDate,
 	} = useDates();
 
+	const date = queryString.parse(search);
+
 	useEffect(() => {
 		if (isModal(pathname)) return; // Disable functionally when on a modal page.
 
-		setSelectedDate(name);
+		if (name) {
+			setSelectedDate(name);
+		}
+		if (date?.name) {
+			addDate(date, true);
+		}
 	}, [name]); // eslint-disable-line
 
 	return (
@@ -41,7 +50,7 @@ const HomePage = () => {
 			</main>
 
 			{/* If no date is selected... Redirect to the first one */}
-			{name === undefined && (
+			{!isModal(pathname) && (name === undefined || selectedDate?.name === undefined) && (
 				<Redirect to={`/${toKebabCase(dates[0].name)}/`} />
 			)}
 		</>

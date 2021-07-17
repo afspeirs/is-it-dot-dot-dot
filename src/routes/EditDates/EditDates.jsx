@@ -84,7 +84,7 @@ const EditDates = () => {
 											id={dayId}
 											name={dayId}
 											label="Day"
-											value={date.day}
+											value={parseInt(date.day, 10)}
 											className={classes.formDropdown}
 											onChange={handleChangeSelect}
 										>
@@ -97,7 +97,7 @@ const EditDates = () => {
 											id={monthId}
 											name={monthId}
 											label="Month"
-											value={date.month}
+											value={parseInt(date.month, 10)}
 											className={classes.formDropdown}
 											onChange={handleChangeSelect}
 										>
