@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useConfirm } from 'material-ui-confirm';
 
 import localDates from '@/dates';
 import { getCurrentDate, toKebabCase } from '@/utils';
 
 const DatesValue = () => {
+	const confirm = useConfirm();
+	const history = useHistory();
 	const [selectedDate, setSelectedDate] = useState();
 	const [currentDate, setCurrentDate] = useState(getCurrentDate);
 	const [dates, setDates] = useState(JSON.parse(localStorage.getItem('dates')) || localDates);
@@ -20,12 +24,39 @@ const DatesValue = () => {
 		return date.valueNo || textNo;
 	};
 
-	const addDate = () => setDates([...dates, { ...blankDate }]);
+	const addDate = (date, redirect = false) => {
+		const existingDate = dates.find((el) => el.name === date?.name);
+		const duplicateText = 'DUPLICATE';
+
+		if (existingDate) {
+			setDates([...dates, {
+				...blankDate,
+				...date,
+				name: `${date.name} ${duplicateText}`,
+			}]);
+		} else {
+			setDates([...dates, {
+				...blankDate,
+				...date,
+			}]);
+		}
+
+		if (redirect) {
+			history.replace(`/${toKebabCase(date.name)}${existingDate ? `-${duplicateText.toLocaleLowerCase()}` : ''}/`);
+		}
+	};
 
 	const deleteDate = (index) => {
-		const updatedDates = [...dates];
-		updatedDates.splice(index, 1);
-		setDates(updatedDates);
+		confirm({
+			title: `Are you sure you want to delete "${dates[index].name}"?`,
+			cancellationText: 'No',
+			confirmationText: 'Yes',
+		})
+			.then(() => {
+				const updatedDates = [...dates];
+				updatedDates.splice(index, 1);
+				setDates(updatedDates);
+			});
 	};
 
 	const resetDates = () => {
@@ -34,7 +65,6 @@ const DatesValue = () => {
 	};
 
 	const updateDates = (array) => {
-		localStorage.setItem('dates', JSON.stringify(array));
 		setDates(array);
 	};
 
@@ -56,6 +86,11 @@ const DatesValue = () => {
 		}, 1000);
 		return () => clearInterval(interval);
 	}, []); // eslint-disable-line
+
+	// When dates gets updated also update the localStorage
+	useEffect(() => {
+		localStorage.setItem('dates', JSON.stringify(dates));
+	}, [dates]);
 
 	useEffect(() => {
 		if (dates.length === 0) addDate();

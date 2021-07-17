@@ -1,3 +1,4 @@
+// import queryString from 'query-string';
 import {
 	ListItem,
 	ListItemIcon,
@@ -33,6 +34,11 @@ const LabelsList = () => {
 					button
 					exact
 					to={`/${toKebabCase(date.name)}/`}
+					// to={`/?${queryString.stringify(date)}`}
+					// isActive={(match, { search }) => {
+					// 	const isActiveDate = queryString.parse(search);
+					// 	return isActiveDate.name === date.name;
+					// }}
 					className={classes.listItem}
 					component={RouterNavLink}
 				>

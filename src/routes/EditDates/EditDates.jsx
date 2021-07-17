@@ -26,7 +26,7 @@ const EditDates = () => {
 
 	const days = [...Array(31)].map((e, i) => i + 1);
 	const months = [...Array(12)].map((e, i) => i + 1);
-	const fabDisabled = dates[dates.length - 1]?.name === '';
+	const fabDisabled = dates.find((date) => date.name === '');
 
 	const handleChangeSelect = (event) => {
 		const { name, value } = event.target;
@@ -84,7 +84,7 @@ const EditDates = () => {
 											id={dayId}
 											name={dayId}
 											label="Day"
-											value={date.day}
+											value={parseInt(date.day, 10)}
 											className={classes.formDropdown}
 											onChange={handleChangeSelect}
 										>
@@ -97,7 +97,7 @@ const EditDates = () => {
 											id={monthId}
 											name={monthId}
 											label="Month"
-											value={date.month}
+											value={parseInt(date.month, 10)}
 											className={classes.formDropdown}
 											onChange={handleChangeSelect}
 										>
@@ -151,7 +151,7 @@ const EditDates = () => {
 				aria-label="add"
 				className={classes.fab}
 				disabled={fabDisabled}
-				onClick={addDate}
+				onClick={() => addDate()}
 			>
 				<AddIcon />
 			</Fab>
