@@ -3,7 +3,7 @@ import {
 	List,
 } from '@material-ui/core';
 
-import ClearDates from '@/components/ClearDates';
+import ResetDates from '@/components/ResetDates';
 import AppVersion from '@/components/shared/AppVersion';
 import ChangeTheme from '@/components/shared/ChangeTheme';
 import CheckForInstallPrompt from '@/components/shared/CheckForInstallPrompt';
@@ -24,7 +24,7 @@ const Settings = () => (
 
 			<Divider />
 
-			<ClearDates />
+			<ResetDates />
 		</List>
 	</Modal>
 );
