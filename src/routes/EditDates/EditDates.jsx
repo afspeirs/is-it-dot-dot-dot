@@ -151,7 +151,7 @@ const EditDates = () => {
 				aria-label="add"
 				className={classes.fab}
 				disabled={fabDisabled}
-				onClick={addDate}
+				onClick={() => addDate()}
 			>
 				<AddIcon />
 			</Fab>
