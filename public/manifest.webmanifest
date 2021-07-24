@@ -1,7 +1,7 @@
 {
-	"short_name": "Is it ...",
 	"name": "Is it ...",
-	"description": "Web site that tells you if is a certain day",
+	"short_name": "Is it ...",
+	"description": "Determine if it is a certain day or not",
 	"dir": "ltr",
 	"lang": "en",
 	"start_url": ".",
