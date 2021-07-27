@@ -38,14 +38,24 @@ const Container = ({ children }) => {
 		{
 			icon: <ShareIcon />,
 			onClick: () => {
-				navigator.share({
-					title: `Is it ${selectedDate.name}`,
-					url: `${document.location.origin}/?${queryString.stringify(selectedDate)}`,
-				})
-					.catch(console.error); // eslint-disable-line no-console
+				const title = `Is it ${selectedDate.name}`;
+				const url = `${document.location.origin}/?${queryString.stringify(selectedDate)}`;
+
+				if (navigator.share) {
+					await navigator.share({ title, url })
+						.catch(console.error); // eslint-disable-line no-console
+				} else if (navigator.clipboard) {
+					await navigator.clipboard.writeText(url)
+						.then(() => {
+							snackbar.showMessage({
+								message: `Copied shareable link to "Is it ${selectedDate.name}"}`,
+							});
+						})
+						.catch(console.error); // eslint-disable-line no-console
+				}
 			},
-			text: 'Search Notes',
-			visible: Boolean(navigator.share),
+			text: `Share "Is it ${selectedDate.name}"`,
+			visible: Boolean(navigator.share || navigator.clipboard),
 		},
 	].filter((item) => item.visible !== false);
 
