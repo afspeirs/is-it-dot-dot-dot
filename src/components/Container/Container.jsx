@@ -1,25 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
 import {
+	Box,
 	AppBar,
 	IconButton,
 	Drawer,
 	Toolbar,
 	Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Menu as MenuIcon,
 	Share as ShareIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import DrawerContent from '@/components/DrawerContent';
 import HeaderContent from '@/components/shared/HeaderContent';
 import { useDates } from '@/hooks/Dates';
 import { useHotkeys } from '@/hooks/Hotkeys';
-import useStyles from './Container.styled';
+import { useSnackbar } from '@/hooks/Snackbar';
+import styles from './Container.styled';
 
 const propTypes = {
 	children: PropTypes.oneOfType([
@@ -31,13 +33,15 @@ const propTypes = {
 const Container = ({ children }) => {
 	const { selectedDate } = useDates();
 	const history = useHistory();
-	const classes = useStyles();
+	const snackbar = useSnackbar();
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
-	const headerItems = [
+	// TODO: Add useMemo here
+
+	const headerItems = useMemo(() => [
 		{
 			icon: <ShareIcon />,
-			onClick: () => {
+			onClick: async () => {
 				const title = `Is it ${selectedDate.name}`;
 				const url = `${document.location.origin}/?${queryString.stringify(selectedDate)}`;
 
@@ -48,16 +52,16 @@ const Container = ({ children }) => {
 					await navigator.clipboard.writeText(url)
 						.then(() => {
 							snackbar.showMessage({
-								message: `Copied shareable link to "Is it ${selectedDate.name}"}`,
+								message: `Copied shareable link to "Is it ${selectedDate?.name}"}`,
 							});
 						})
 						.catch(console.error); // eslint-disable-line no-console
 				}
 			},
-			text: `Share "Is it ${selectedDate.name}"`,
+			text: `Share "Is it ${selectedDate?.name}"`,
 			visible: Boolean(navigator.share || navigator.clipboard),
 		},
-	].filter((item) => item.visible !== false);
+	].filter((item) => item.visible !== false), [selectedDate]);
 
 	// Close drawer only in mobile
 	const handleDrawerClose = () => setDrawerOpen(false);
@@ -90,15 +94,15 @@ const Container = ({ children }) => {
 	}, [history]);
 
 	return (
-		<div className={classes.container}>
+		<Box sx={styles.container}>
 			<Helmet>
 				<title>{`Is it ${selectedDate?.name || '...'}?`}</title>
 			</Helmet>
 
-			<AppBar elevation={0}>
+			<AppBar color="transparent" elevation={0} sx={styles.appBar}>
 				<Toolbar>
 					<IconButton
-						className={classes.menuButton}
+						sx={styles.menuButton}
 						color="inherit"
 						aria-label="Open drawer"
 						edge="start"
@@ -106,7 +110,7 @@ const Container = ({ children }) => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Typography className={classes.title} component="h1" variant="h6" noWrap>
+					<Typography sx={styles.title} component="h1" variant="h6" noWrap>
 						{`Is it ${selectedDate?.name || '...'}?`}
 					</Typography>
 					<HeaderContent
@@ -121,10 +125,7 @@ const Container = ({ children }) => {
 				variant="temporary"
 				anchor="left"
 				open={drawerOpen}
-				className={classes.drawer}
-				classes={{
-					paper: classes.drawerPaper,
-				}}
+				sx={styles.drawer}
 				onClose={handleDrawerClose}
 				ModalProps={{ keepMounted: true }}
 			>
@@ -132,7 +133,7 @@ const Container = ({ children }) => {
 			</Drawer>
 
 			{children}
-		</div>
+		</Box>
 	);
 };
 

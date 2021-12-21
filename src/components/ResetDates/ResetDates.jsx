@@ -2,10 +2,10 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Delete as DeleteIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useConfirm } from 'material-ui-confirm';
 
 import { useDates } from '@/hooks/Dates';

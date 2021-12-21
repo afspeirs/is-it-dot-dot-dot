@@ -1,9 +1,7 @@
-const theme = {
+export default {
 	palette: {
 		primary: {
 			main: '#464',
 		},
 	},
 };
-
-export default theme;

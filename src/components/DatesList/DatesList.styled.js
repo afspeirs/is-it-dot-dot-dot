@@ -1,22 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-	list: {
-		flexGrow: 1,
-		overflowY: 'auto',
-		overflowX: 'hidden',
-	},
-	listItem: {
-		'&.active': {
-			backgroundColor: theme.palette.action.focus,
-		},
-	},
+const styles = {
 	listSubheader: {
 		userSelect: 'none',
+		// TODO: See if I can remove this fix to match dark mode
+		backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15))',
 	},
-	subheader: {
-		backgroundColor: theme.palette.background.paper,
-	},
-}));
+};
 
-export default useStyles;
+export default styles;

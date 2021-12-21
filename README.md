@@ -1,5 +1,7 @@
 # Is it dot dot dot
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/479ddda4-29cd-469a-8223-96db6acb54e0/deploy-status)](https://app.netlify.com/sites/is-it-dot-dot-dot/deploys)
+
 ## Available Scripts
 
 In the project directory, you can run:

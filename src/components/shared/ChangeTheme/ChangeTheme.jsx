@@ -6,18 +6,13 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Brush as BrushIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import { useGlobalState } from '@/hooks/GlobalState';
-
-const options = [
-	{ text: 'System Default', value: 'default' },
-	{ text: 'Light', value: 'light' },
-	{ text: 'Dark', value: 'dark' },
-];
+import options from './data';
 
 const ChangeTheme = () => {
 	const [{ settings: { appTheme } }, dispatch] = useGlobalState();
@@ -25,6 +20,7 @@ const ChangeTheme = () => {
 	// eslint-disable-next-line max-len
 	const [selectedIndex, setSelectedIndex] = useState(options.findIndex((item) => item.value === appTheme));
 
+	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	const handleClickMenuItem = (index) => {
@@ -39,7 +35,7 @@ const ChangeTheme = () => {
 
 	return (
 		<>
-			<ListItem button onClick={() => setOpen(true)}>
+			<ListItem button onClick={handleOpen}>
 				<ListItemIcon>
 					<BrushIcon />
 				</ListItemIcon>

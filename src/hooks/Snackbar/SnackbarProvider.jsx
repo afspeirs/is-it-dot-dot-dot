@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Button from '@mui/material/Button';
 
 import SnackbarContext from './SnackbarContext';
+
+const defaultProps = {
+	forceSecondaryButtonColor: false,
+};
 
 const propTypes = {
 	children: PropTypes.oneOfType([
 		PropTypes.arrayOf(PropTypes.node),
 		PropTypes.node,
 	]).isRequired,
+	forceSecondaryButtonColor: PropTypes.bool,
 };
 
-const SnackbarProvider = ({ children }) => {
+const SnackbarProvider = ({ children, forceSecondaryButtonColor }) => {
 	const [content, setContent] = useState(null);
 
 	const showMessage = ({
@@ -32,9 +37,9 @@ const SnackbarProvider = ({ children }) => {
 		content.actionFunction();
 	};
 
-	const contextValue = {
+	const contextValue = useMemo(() => ({
 		showMessage,
-	};
+	}), [content]);
 
 	return (
 		<>
@@ -44,7 +49,7 @@ const SnackbarProvider = ({ children }) => {
 
 			<Snackbar
 				anchorOrigin={{
-					horizontal: 'left',
+					horizontal: 'right',
 					vertical: 'bottom',
 				}}
 				open={Boolean(content?.message)}
@@ -55,7 +60,7 @@ const SnackbarProvider = ({ children }) => {
 				action={content?.actionText && (
 					<Button
 						key="update"
-						color="primary"
+						color={forceSecondaryButtonColor ? 'secondary' : 'primary'}
 						size="small"
 						onClick={handleActionClick}
 					>
@@ -67,6 +72,7 @@ const SnackbarProvider = ({ children }) => {
 	);
 };
 
+SnackbarProvider.defaultProps = defaultProps;
 SnackbarProvider.propTypes = propTypes;
 
 export default SnackbarProvider;

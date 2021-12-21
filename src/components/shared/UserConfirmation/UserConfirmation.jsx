@@ -4,7 +4,7 @@ import {
 	Dialog,
 	DialogActions,
 	DialogTitle,
-} from '@material-ui/core';
+} from '@mui/material';
 
 const UserConfirmation = (message, callback) => {
 	const container = document.getElementById('user-confirmation');

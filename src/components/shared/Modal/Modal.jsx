@@ -2,23 +2,24 @@ import { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { Prompt, useHistory } from 'react-router-dom';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/styles';
 import {
 	AppBar,
+	Box,
 	Dialog,
 	IconButton,
 	Slide,
 	Toolbar,
 	Typography,
 	useMediaQuery,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	ArrowBack as ArrowBackIcon,
 	Close as CloseIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import HeaderContent from '@/components/shared/HeaderContent';
-import useStyles from './Modal.styled';
+import styles from './Modal.styled';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Transition = forwardRef((props, ref) => <Slide ref={ref} {...props} />);
@@ -26,7 +27,6 @@ const Transition = forwardRef((props, ref) => <Slide ref={ref} {...props} />);
 const defaultProps = {
 	fullscreen: false,
 	headerItems: [],
-	maxHeight: false,
 	maxWidth: 'sm',
 	showPrompt: false,
 	title: '',
@@ -46,7 +46,6 @@ const propTypes = {
 			text: PropTypes.string,
 		}),
 	),
-	maxHeight: PropTypes.bool,
 	maxWidth: PropTypes.oneOf([
 		'xs',
 		'sm',
@@ -64,13 +63,11 @@ const Modal = ({
 	children,
 	fullscreen,
 	headerItems,
-	maxHeight,
 	maxWidth,
 	showPrompt,
 	title,
 	titleDocument,
 }) => {
-	const classes = useStyles({ maxHeight });
 	const history = useHistory();
 	const [open, setOpen] = useState(true);
 	const { breakpoints } = useTheme();
@@ -100,31 +97,34 @@ const Modal = ({
 				onClose={handleClose}
 				open={open}
 				PaperProps={{
-					className: classes.paper,
+					sx: styles.paper,
 				}}
 				TransitionComponent={Transition}
 				TransitionProps={{
 					direction: mobile ? 'left' : 'up',
 				}}
 			>
-				<AppBar className={classes.appBar}>
+				<AppBar
+					position="relative"
+					sx={fullScreenModal ? styles.appBarPadding : null}
+				>
 					<Toolbar>
 						{fullScreenModal && (
 							<IconButton
 								aria-label="close"
-								className={classes.menuButton}
 								color="inherit"
 								edge="start"
 								onClick={handleClose}
+								sx={styles.menuButton}
 							>
 								<ArrowBackIcon />
 							</IconButton>
 						)}
 						<Typography
-							className={classes.title}
 							component="h2"
 							id={`${title}-modal-title`}
 							noWrap
+							sx={styles.title}
 							variant="h6"
 						>
 							{title}
@@ -145,9 +145,14 @@ const Modal = ({
 						)}
 					</Toolbar>
 				</AppBar>
-				<div className={classes.children}>
+				<Box
+					sx={{
+						...styles.children,
+						...fullScreenModal && styles.childrenPadding,
+					}}
+				>
 					{children}
-				</div>
+				</Box>
 			</Dialog>
 
 			<Prompt when={showPrompt} message="Are you sure you want to leave without saving?" />

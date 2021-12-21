@@ -1,22 +1,22 @@
-import React from 'react';
+import { Fragment } from 'react';
 import {
+	Box,
 	Fab,
 	Divider,
 	MenuItem,
 	IconButton,
 	TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Add as AddIcon,
 	Delete as DeleteIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import Modal from '@/components/shared/Modal';
 import { useDates } from '@/hooks/Dates';
-import useStyles from './EditDates.styled';
+import styles from './EditDates.styled';
 
 const EditDates = () => {
-	const classes = useStyles();
 	const {
 		addDate,
 		dates,
@@ -46,9 +46,8 @@ const EditDates = () => {
 		<Modal
 			title="Edit Dates"
 			titleDocument="Is it editing the Dates?"
-			maxHeight
 		>
-			<div className={classes.spacer}>
+			<Box sx={styles.spacer}>
 				{dates.map((date, index) => {
 					const nameId = `name-${index}`;
 					const dayId = `day-${index}`;
@@ -58,20 +57,21 @@ const EditDates = () => {
 
 					return (
 						// eslint-disable-next-line react/no-array-index-key
-						<React.Fragment key={`date-${index}`}>
+						<Fragment key={`date-${index}`}>
 							{index !== 0 && <Divider />}
-							<form
-								className={classes.root}
+							<Box
+								component="form"
+								sx={styles.form}
 								noValidate
 								autoComplete="off"
 							>
-								<div className={classes.formContainer}>
-									<div className={classes.formContent}>
+								<Box sx={styles.formContainer}>
+									<Box sx={styles.formContent}>
 										<TextField
 											id={nameId}
 											name={nameId}
 											label="Name"
-											className={classes.formText}
+											sx={styles.formText}
 											value={date.name}
 											onChange={handleChangeText}
 											inputProps={{
@@ -85,7 +85,7 @@ const EditDates = () => {
 											name={dayId}
 											label="Day"
 											value={parseInt(date.day, 10)}
-											className={classes.formDropdown}
+											sx={styles.formDropdown}
 											onChange={handleChangeSelect}
 										>
 											{days.map((value) => (
@@ -98,22 +98,22 @@ const EditDates = () => {
 											name={monthId}
 											label="Month"
 											value={parseInt(date.month, 10)}
-											className={classes.formDropdown}
+											sx={styles.formDropdown}
 											onChange={handleChangeSelect}
 										>
 											{months.map((value) => (
 												<MenuItem key={value} value={value}>{value}</MenuItem>
 											))}
 										</TextField>
-									</div>
-									<div className={classes.formContent}>
+									</Box>
+									<Box sx={styles.formContent}>
 										<TextField
 											id={valueYesId}
 											name={valueYesId}
 											label="Default Yes"
 											placeholder="Yes"
 											value={date.valueYes}
-											className={classes.formText}
+											sx={styles.formText}
 											onChange={handleChangeText}
 											inputProps={{
 												'data-idx': index,
@@ -126,30 +126,34 @@ const EditDates = () => {
 											label="Default No"
 											placeholder="No"
 											value={date.valueNo}
-											className={classes.formText}
+											sx={styles.formText}
 											onChange={handleChangeText}
 											inputProps={{
 												'data-idx': index,
 												'data-key': 'valueNo',
 											}}
 										/>
-									</div>
-								</div>
-								<div className={classes.formEnd}>
-									<IconButton aria-label="delete" onClick={() => deleteDate(index)}>
+									</Box>
+								</Box>
+								<Box sx={styles.formEnd}>
+									<IconButton
+										aria-label="delete"
+										onClick={() => deleteDate(index)}
+										size="large"
+									>
 										<DeleteIcon />
 									</IconButton>
-								</div>
-							</form>
-						</React.Fragment>
+								</Box>
+							</Box>
+						</Fragment>
 					);
 				})}
-			</div>
+			</Box>
 
 			<Fab
 				color="primary"
 				aria-label="add"
-				className={classes.fab}
+				sx={styles.fab}
 				disabled={fabDisabled}
 				onClick={() => addDate()}
 			>

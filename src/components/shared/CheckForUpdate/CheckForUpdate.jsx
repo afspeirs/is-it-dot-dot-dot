@@ -6,19 +6,18 @@ import {
 	ListItemIcon,
 	ListItemSecondaryAction,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	SystemUpdate as SystemUpdateIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import { useGlobalState } from '@/hooks/GlobalState';
-import useStyles from './CheckForUpdate.styled';
+import styles from './CheckForUpdate.styled';
 
 const CheckForUpdate = () => {
 	const [{ updateAvailable }] = useGlobalState();
 	const [loading, setLoading] = useState(false);
 	const timer = useRef();
-	const classes = useStyles();
 
 	// This abominable one-liner will clear the timer if CheckForUpdate component un-mounts
 	useEffect(() => () => clearTimeout(timer.current), []);
@@ -47,7 +46,7 @@ const CheckForUpdate = () => {
 				<SystemUpdateIcon />
 			</ListItemIcon>
 			<ListItemText primary="Check for update" />
-			<ListItemSecondaryAction className={classes.listItemSecondaryAction}>
+			<ListItemSecondaryAction sx={styles.listItemSecondaryAction}>
 				{updateAvailable ? (
 					<Chip
 						color="primary"

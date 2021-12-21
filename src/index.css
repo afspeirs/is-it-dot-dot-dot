@@ -1,6 +1,8 @@
 html {
 	overscroll-behavior: none;
 	overflow: hidden;
+	/* Prevent iOS text size adjust after orientation change */
+	-webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -11,7 +13,7 @@ body {
 }
 
 a {
-	color: #446644;
+	color: #464;
 }
 
 *,

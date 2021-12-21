@@ -1,17 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
+const styles = {
 	list: {
-		flexGrow: 1,
+		height: '100%',
 		overflowY: 'auto',
 		overflowX: 'hidden',
-		backgroundColor: theme.palette.background.paper,
 	},
-	listItem: {
-		'&.active': {
-			backgroundColor: theme.palette.action.focus,
-		},
-	},
-}));
+};
 
-export default useStyles;
+export default styles;
