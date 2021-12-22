@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 import {
 	Box,
 	AppBar,
@@ -35,8 +36,7 @@ const Container = ({ children }) => {
 	const history = useHistory();
 	const snackbar = useSnackbar();
 	const [drawerOpen, setDrawerOpen] = useState(false);
-
-	// TODO: Add useMemo here
+	const { palette: { primary } } = useTheme();
 
 	const headerItems = useMemo(() => [
 		{
@@ -97,6 +97,7 @@ const Container = ({ children }) => {
 		<Box sx={styles.container}>
 			<Helmet>
 				<title>{`Is it ${selectedDate?.name || '...'}?`}</title>
+				<meta name="theme-color" content={primary.main} />
 			</Helmet>
 
 			<AppBar color="transparent" elevation={0} sx={styles.appBar}>
