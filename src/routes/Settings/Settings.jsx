@@ -3,6 +3,7 @@ import {
 	List,
 } from '@mui/material';
 
+import ChangePrimaryColor from '@/components/ChangePrimaryColor';
 import ResetDates from '@/components/ResetDates';
 import AppVersion from '@/components/shared/AppVersion';
 import ChangeTheme from '@/components/shared/ChangeTheme';
@@ -18,6 +19,7 @@ const Settings = () => (
 			<Divider />
 
 			<ChangeTheme />
+			<ChangePrimaryColor />
 
 			<Divider />
 
