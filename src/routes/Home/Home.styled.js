@@ -1,6 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
+const styles = {
 	root: {
 		position: 'absolute',
 		top: 0,
@@ -14,8 +12,8 @@ const useStyles = makeStyles({
 	typography: {
 		fontSize: '100px',
 		fontWeight: 'bold',
-		color: '#fff',
+		color: 'primary.contrastText',
 	},
-});
+};
 
-export default useStyles;
+export default styles;

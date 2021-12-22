@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import queryString from 'query-string';
 import { Redirect, useParams, useLocation } from 'react-router-dom';
-import { Typography } from '@material-ui/core';
+import {
+	Box,
+	Typography,
+} from '@mui/material';
 
-import { isModal } from '@/components/Routes';
 import { useDates } from '@/hooks/Dates';
 import { toKebabCase } from '@/utils';
-import useStyles from './Home.styled';
+import styles from './Home.styled';
 
 const HomePage = () => {
-	const classes = useStyles();
 	const { name } = useParams();
-	const { pathname, search } = useLocation();
+	const { search } = useLocation();
 	const {
 		addDate,
 		dates,
@@ -23,8 +24,6 @@ const HomePage = () => {
 	const date = queryString.parse(search);
 
 	useEffect(() => {
-		if (isModal(pathname)) return; // Disable functionally when on a modal page.
-
 		if (name) {
 			setSelectedDate(name);
 		}
@@ -35,9 +34,12 @@ const HomePage = () => {
 
 	return (
 		<>
-			<main className={classes.root}>
+			<Box
+				component="main"
+				sx={styles.root}
+			>
 				<Typography
-					className={classes.typography}
+					sx={styles.typography}
 					component="h2"
 					variant="body1"
 				>
@@ -47,10 +49,10 @@ const HomePage = () => {
 						'Loading'
 					)}
 				</Typography>
-			</main>
+			</Box>
 
 			{/* If no date is selected... Redirect to the first one */}
-			{!isModal(pathname) && (name === undefined || selectedDate?.name === undefined) && (
+			{(name === undefined || selectedDate?.name === undefined) && (
 				<Redirect to={`/${toKebabCase(dates[0].name)}/`} />
 			)}
 		</>

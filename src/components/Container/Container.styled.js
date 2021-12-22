@@ -1,6 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
+const styles = {
+	appBar: {
+		color: 'primary.contrastText',
+	},
 	container: {
 		position: 'absolute',
 		top: 0,
@@ -9,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
 		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
-		backgroundColor: theme.palette.primary.main,
-		color: theme.palette.text,
+		backgroundColor: 'primary.main',
+		color: 'text.primary',
 	},
 	content: {
 		position: 'relative',
@@ -23,23 +24,22 @@ const useStyles = makeStyles((theme) => ({
 	drawer: {
 		flexShrink: 0,
 		width: '80%',
-		maxWidth: 320,
-		zIndex: 0,
-	},
-	drawerHeader: theme.mixins.toolbar,
-	drawerPaper: {
-		width: 'inherit',
-		maxWidth: 'inherit',
+		maxWidth: 'calc(env(safe-area-inset-left) + 320px)',
+		'& .MuiDrawer-paper': {
+			width: 'inherit',
+			maxWidth: 'inherit',
+			paddingTop: 'env(safe-area-inset-top)',
+			paddingBottom: 'env(safe-area-inset-bottom)',
+			paddingLeft: 'env(safe-area-inset-left)',
+		},
 	},
 	menuButton: {
-		marginRight: theme.spacing(2),
+		mr: 2,
 	},
 	title: {
 		flexGrow: 1,
 		userSelect: 'none',
 	},
-}), {
-	name: 'Container',
-});
+};
 
-export default useStyles;
+export default styles;

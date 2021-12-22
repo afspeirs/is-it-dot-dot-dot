@@ -6,12 +6,13 @@ import './index.css';
 import App from './App';
 import UserConfirmation from './components/shared/UserConfirmation';
 import { GlobalStateProvider } from './hooks/GlobalState';
+import initialGlobalState from './initialGlobalState';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter getUserConfirmation={(message, callback) => UserConfirmation(message, callback)}>
-			<GlobalStateProvider>
+			<GlobalStateProvider initialState={initialGlobalState}>
 				<App />
 			</GlobalStateProvider>
 		</BrowserRouter>

@@ -6,11 +6,11 @@ import {
 	ListItemSecondaryAction,
 	ListItemText,
 	Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	AddToHomeScreen as AddToHomeScreenIcon,
 	Cancel as CancelIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import { useGlobalState } from '@/hooks/GlobalState';
 
@@ -34,7 +34,7 @@ const CheckForInstallPrompt = () => {
 		}
 	};
 
-	return Boolean(beforeInstallPrompt) && (
+	return beforeInstallPrompt ? (
 		<>
 			<ListItem button onClick={handleInstallClick}>
 				<ListItemIcon>
@@ -56,7 +56,7 @@ const CheckForInstallPrompt = () => {
 			</ListItem>
 			<Divider />
 		</>
-	);
+	) : null;
 };
 
 export default CheckForInstallPrompt;

@@ -1,26 +1,25 @@
 // import queryString from 'query-string';
 import {
 	ListItem,
-	ListItemIcon,
+	// ListItemIcon,
 	ListSubheader,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Event as EventIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
-import RouterNavLink from '@/components/shared/RouterNavLink';
+import ListButton from '@/components/shared/ListButton';
 import { useDates } from '@/hooks/Dates';
 import { toKebabCase } from '@/utils';
-import useStyles from './DatesList.styled';
+import styles from './DatesList.styled';
 
 const LabelsList = () => {
 	const { dates } = useDates();
-	const classes = useStyles();
 
 	return (
 		<>
-			<ListSubheader className={classes.listSubheader}>
+			<ListSubheader sx={styles.listSubheader}>
 				Dates
 			</ListSubheader>
 			{dates.length === 0 && (
@@ -29,29 +28,12 @@ const LabelsList = () => {
 				</ListItem>
 			)}
 			{dates.map((date) => (
-				<ListItem
+				<ListButton
 					key={date.name}
-					button
-					exact
+					Icon={EventIcon}
+					primary={date.name}
 					to={`/${toKebabCase(date.name)}/`}
-					// to={`/?${queryString.stringify(date)}`}
-					// isActive={(match, { search }) => {
-					// 	const isActiveDate = queryString.parse(search);
-					// 	return isActiveDate.name === date.name;
-					// }}
-					className={classes.listItem}
-					component={RouterNavLink}
-				>
-					<ListItemIcon>
-						<EventIcon />
-					</ListItemIcon>
-					<ListItemText
-						primary={date.name}
-						primaryTypographyProps={{
-							noWrap: true,
-						}}
-					/>
-				</ListItem>
+				/>
 			))}
 		</>
 	);

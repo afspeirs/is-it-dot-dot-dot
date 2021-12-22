@@ -1,20 +1,17 @@
 import {
 	Divider,
 	List,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import ResetDates from '@/components/ResetDates';
 import AppVersion from '@/components/shared/AppVersion';
 import ChangeTheme from '@/components/shared/ChangeTheme';
-import CheckForInstallPrompt from '@/components/shared/CheckForInstallPrompt';
 import CheckForUpdate from '@/components/shared/CheckForUpdate';
 import Modal from '@/components/shared/Modal';
 
 const Settings = () => (
 	<Modal title="Settings" titleDocument="Is it the Settings?">
 		<List>
-			<CheckForInstallPrompt />
-
 			<AppVersion />
 			<CheckForUpdate />
 

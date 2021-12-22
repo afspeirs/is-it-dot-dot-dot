@@ -2,10 +2,10 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
 	Settings as SettingsIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 const AppVersion = () => (
 	<ListItem>

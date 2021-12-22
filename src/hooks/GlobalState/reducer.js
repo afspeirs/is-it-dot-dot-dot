@@ -1,10 +1,8 @@
-export { default as initialState } from './initial-state';
-
-export const reducer = (state, action) => {
+const reducer = (state, action) => {
 	const [location, name] = action.type.split('-');
 
 	if (location === 'settings') {
-		const value = action.value || !state[location][name];
+		const value = action.value || action.value === false ? action.value : !state[location][name];
 
 		localStorage.setItem(action.type, JSON.stringify(value));
 
@@ -19,6 +17,8 @@ export const reducer = (state, action) => {
 
 	return {
 		...state,
-		[name]: action.value || !state[name],
+		[name]: action.value || action.value === false ? action.value : !state[name],
 	};
 };
+
+export default reducer;

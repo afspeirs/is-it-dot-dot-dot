@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
-import { NavLink } from 'react-router-dom';
+
+import { NavLinkStyled } from './RouterNavLink.styled';
 
 const RouterNavLink = forwardRef((props, ref) => (
 	// eslint-disable-next-line react/jsx-props-no-spreading
-	<NavLink innerRef={ref} {...props} />
+	<NavLinkStyled innerRef={ref} {...props} />
 ));
 
 export default RouterNavLink;

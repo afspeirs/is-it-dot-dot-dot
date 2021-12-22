@@ -1,9 +1,9 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-	root: {
+const styles = {
+	form: {
 		display: 'flex',
-		padding: theme.spacing(3),
+		flexDirection: 'column',
+		p: 3,
+		gap: 2,
 	},
 	formContainer: {
 		display: 'flex',
@@ -12,17 +12,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 	formContent: {
 		display: 'flex',
-		paddingTop: theme.spacing(2),
-		'&:first-child': {
-			paddingTop: 0,
-		},
-		'&> *': {
-			paddingRight: theme.spacing(4),
+		gap: 4,
+		justifyContent: 'center',
+		'&:not(:first-of-type)': {
+			pt: 2,
 		},
 	},
 	formEnd: {
 		display: 'flex',
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	formControl: {
 		minWidth: 86,
@@ -35,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	fab: {
 		position: 'absolute',
-		bottom: theme.spacing(2),
-		right: theme.spacing(2),
+		bottom: 16,
+		right: 16,
 	},
 	spacer: {
-		marginBottom: theme.spacing(8),
+		mb: 8,
 	},
-}));
+};
 
-export default useStyles;
+export default styles;
