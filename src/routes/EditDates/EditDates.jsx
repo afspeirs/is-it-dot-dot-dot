@@ -66,19 +66,19 @@ const EditDates = () => {
 								autoComplete="off"
 							>
 								<Box sx={styles.formContainer}>
+									<TextField
+										id={nameId}
+										name={nameId}
+										label="Name"
+										sx={styles.formText}
+										value={date.name}
+										onChange={handleChangeText}
+										inputProps={{
+											'data-idx': index,
+											'data-key': 'name',
+										}}
+									/>
 									<Box sx={styles.formContent}>
-										<TextField
-											id={nameId}
-											name={nameId}
-											label="Name"
-											sx={styles.formText}
-											value={date.name}
-											onChange={handleChangeText}
-											inputProps={{
-												'data-idx': index,
-												'data-key': 'name',
-											}}
-										/>
 										<TextField
 											select
 											id={dayId}
@@ -140,6 +140,7 @@ const EditDates = () => {
 										aria-label="delete"
 										onClick={() => deleteDate(index)}
 										size="large"
+										color="error"
 									>
 										<DeleteIcon />
 									</IconButton>

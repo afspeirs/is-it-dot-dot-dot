@@ -1,6 +1,7 @@
 const styles = {
 	form: {
 		display: 'flex',
+		flexDirection: 'column',
 		p: 3,
 		gap: 2,
 	},
@@ -12,9 +13,9 @@ const styles = {
 	formContent: {
 		display: 'flex',
 		gap: 4,
-		pt: 2,
-		'&:first-of-type': {
-			paddingTop: 0,
+		justifyContent: 'center',
+		'&:not(:first-of-type)': {
+			pt: 2,
 		},
 	},
 	formEnd: {
